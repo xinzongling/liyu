@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>king-court.html</title>
+</head>
+<body>
+</body>
+<script>
+	(function(w){
+		var King=null;
+		function king(){
+			/*this.name='皇帝';
+			this.id=Math.random();*/
+			if(!King){
+				this.name='皇帝';
+				this.id=Math.random();
+				King=this;
+			}
+			return King;
+		}
+		king.prototype={
+			constructor:king,
+			__prototype:Object.prototype,
+			say:function(){
+				console.log(this.name+this.id+'say:平身');
+			}
+		}
+		/*king.getKing=(function(){
+			var King=null;
+			return function(){
+				if(!King){
+					King=new king();
+				}
+				return King;
+			}
+		})();*/
+		w.king=king;
+	})(window)
+	for(var i=0;i<5;i++){
+		console.log('day'+i);
+		new king().say();
+		/*king.getKing().say();*/
+	}
+</script>
+</html>

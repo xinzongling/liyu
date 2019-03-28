@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>publish-homeWork.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	(function(w){
+		function teacher(name){
+			this.name=name;
+			this.student=[];
+		}
+		teacher.prototype={
+			constructor:teacher,
+			__prototype__:Object.prototype,
+			register:function(student){
+				this.student.push(student);
+			},
+			publish:function(msg){
+				for(var i=0;i<this.student.length;i++){
+					this.student[i].listen(msg);
+				}
+			}
+		}
+		w.teacher=teacher;
+	})(window);
+	(function(w){
+		function student(name,teacher){
+			this.name=name;
+			this.msg='';
+			teacher.register(this);
+		}
+		student.prototype={
+			constructor:student,
+			__prototype__:Object.prototype,
+			listen:function(msg){
+				this.msg=msg;
+			}
+		}
+		w.student=student;
+	})(window);
+	var teacher1=new teacher('tom');
+	var s1=new student('张三',teacher1);
+	var s2=new student('李四',teacher1);
+	var s3=new student('王五',teacher1);
+	teacher1.publish('完成小米官网');
+	console.log(s1.name+'get'+s1.msg);
+	console.log(s2.name+'get'+s2.msg);
+	console.log(s3.name+'get'+s3.msg);
+
+	var teacher2=new teacher('leo');
+	var s4=new student('小明',teacher2);
+	var s5=new student('小李',teacher2);
+	var s6=new student('小五',teacher2);
+	teacher2.publish('写小米js代码');
+	console.log(s4.name+'get'+s4.msg);
+	console.log(s5.name+'get'+s5.msg);
+	console.log(s6.name+'get'+s6.msg);
+</script>
+</html>

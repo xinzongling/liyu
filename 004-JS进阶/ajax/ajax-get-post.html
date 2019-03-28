@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax-get-post</title>
+</head>
+<body>
+	<input type="button" class="btn" value="获取数据">
+</body>
+<script>
+	(function(w){
+		function ajax(method,url,data,fnSuccess,fnFailed){	
+			var ajax=new XMLHttpRequest();				//创建ajax;
+			if(method=='POST'){ 						//POST请求	
+				ajax.open(method,url,true);				//和服务器进行连接
+				ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				ajax.send(data);						//发送请求
+			}else{  									//GET请求
+				if(data){
+					url=url+'?'+data;
+				}
+				ajax.open(method,url,true);
+				ajax.send();
+			}                       
+				ajax.onreadystatechange=function(){		//监听方法获取数据	ajax有5种准备状态
+					if(ajax.readyState==4){            //数据完全返回,但并不代表成功。
+						if(ajax.status==200){		//成功			
+							fnSuccess(ajax.responseText);//console.log('get data success',ajax.responseText);
+							console.log('aaa',ajax.responseText);
+							}else{
+							if(fnFailed){
+								fnFailed(ajax.status);//console.log('get data failed',ajax.status);
+							};
+						}
+					}	
+				}
+		}
+		w.ajax=ajax;
+	})(window);
+	var btn=document.querySelector('.btn');
+	var ul=document.querySelector('.ul');
+	btn.onclick=function(){
+		ajax('GET',
+			'http://127.0.0.1:3000/data.txt',
+			"",
+			function(val){
+				console.log('get data success',val);
+			},
+			function(status){
+				console.log('get data failed',status);
+			});
+	}
+</script>
+</html>

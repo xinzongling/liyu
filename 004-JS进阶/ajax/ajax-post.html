@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax</title>
+</head>
+<body>
+	<input type="button" class="btn" value="获取数据">
+	<ul class="ul"></ul>
+</body>
+<script>
+	var btn=document.querySelector('.btn');
+	var ul=document.querySelector('.ul');
+	btn.onclick=function(){
+		//创建ajax;
+		var ajax=new XMLHttpRequest();
+		//和服务器进行连接
+		ajax.open('POST','http://127.0.0.1:3000/ajax-post.json',true);
+		ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		//发送请求
+		ajax.send('name=tom&age=18');
+		//监听方法获取数据                       //ajax有5种准备状态
+		ajax.onreadystatechange=function(){
+			if(ajax.readyState==4){            //数据完全返回
+				if(ajax.status==200){					
+					console.log('get data success',ajax.responseText);
+					}
+				}else{
+					console.log('get data failed',ajax.status);
+				}
+			}
+		};
+</script>
+</html>

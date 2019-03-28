@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>singel-login.html</title>
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	.box{
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: 200px;
+		height: 300px;
+		margin-left: -100px;
+		margin-top: -150px;
+		background: pink;
+	}
+	.span1{
+		position: absolute;
+		left: 20px;
+		top: 50px;
+		width: 100px;
+		height: 100px;
+		background: green;
+	}
+</style>
+</head>
+<body>
+	<input type="button" value="按钮" class="btn">	
+</body>
+<script>
+	/*var btn=document.querySelector('.btn');
+	btn.onclick=function(){
+		var div1=document.createElement('div');
+		document.body.appendChild(div1);
+		div1.className='box';
+		var box=document.querySelector('.box');
+		box.style.display='block';
+	}*/
+/*	(function(w){
+		var login=null;
+		function LoginLoyer(){
+			if(!login){
+				var div1=document.createElement('div');
+				document.body.appendChild(div1);
+				div1.className='box';
+				login=div1;
+			}
+		}
+		w.LoginLoyer=LoginLoyer;
+	})(window);
+*/
+
+	//创建login DOM节点
+	function createLogin(){
+		var div1=document.createElement('div');
+		document.body.appendChild(div1);
+		div1.className='box';
+		return div1;
+	}
+	function createMask(){
+		var span1=document.createElement('span');
+		document.body.appendChild(span1);
+		span1.className='span1';
+		return span1;
+	}
+	//生成唯一实例
+	function getSingel(fn){
+		var login=null;
+		return function(){
+			if(!login){
+				login=fn();
+			}
+			return login;
+		}
+	}
+	var createSignelLogin=getSingel(createLogin);
+	var createSignelMast=getSingel(createMask);
+
+	var btn=document.querySelector('.btn');
+	btn.onclick=function(){
+		createSignelLogin();
+		createSignelMast();
+	}
+</script>
+</html>
