@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		div{
+			width: 60px;
+			height: 30px;
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<input type="button" value="点我">
+	<div>1</div>
+	<div>2</div>
+	<div>3</div>
+</body>
+<script src="jquery-1.12.4.js"></script>
+<script>
+	;(function($){
+		$.fn.extend({
+			setColor:function(options){
+				var defaults={
+					color:'red'
+				};
+				options=$.extend(defaults,options);
+				this.each(function(){
+					this.style.color=options.color;
+				});
+			}
+		});
+	})(jQuery);
+	$(function(){
+		$('input').click(function(){
+			$('div').setColor({
+				color:'blue'
+			});
+		});
+	})
+</script>
+</html>

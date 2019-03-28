@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		button{
+			width: 80px;
+			height: 50px;
+		}
+		.box{
+			width: 200px;
+			height: 200px;
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<button>开始</button>
+	<button>隐藏</button>
+	<button>切换</button>
+	<button>停止</button>
+	<div class="box"></div>
+</body>
+<script src="jquery-1.12.4.js"></script>
+<script>
+	/*
+	$('button').eq(0).on('click',function(){
+		$('.box').fadeIn(1000,function(){
+			console.log('fadeIn....')
+		})
+	})
+	$('button').eq(1).on('click',function(){
+		$('.box').fadeOut(1000,function(){
+			console.log('fadeOut....')
+		})
+	})
+	$('button').eq(2).on('click',function(){
+		$('.box').fadeTo(1000,0.4,function(){
+			console.log('fadeTo....')
+		})
+	})*/
+	$('button').eq(0).on('click',function(){
+		$('.box').animate(
+			{
+				width:"300px"
+			}
+			,1000
+			).stop(false,true)
+		.animate(
+			{
+				height:"300px"
+			}
+			,1000
+			)
+	})
+</script>	
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button>点击</button>
+</body>
+<script src="jquery-1.12.4.js"></script>
+<script src="事件触发传递消息练习.js"></script>
+<script>
+	
+	$('button').eq(0).on('click',function(){
+		$('button').eq(0).show();
+		$('button').eq(0).off('sendData').on('sendData',function(err,data){
+			console.log('1:：',data);
+		})		
+	})
+
+</script>
+</html>

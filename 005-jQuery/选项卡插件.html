@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选项卡插件</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		li{
+			list-style: none;
+		}
+		.clearfix:after{
+			clear: both;
+			content: '';
+			display: block;
+		}
+		.tab .btn li{
+			float: left;
+			width: 50px;
+			height: 30px;
+			background: gray;
+			margin-left: 20px;
+			text-align: center;
+			line-height: 30px;
+			cursor: pointer;
+		}
+		.tab .content li{
+			width: 300px;
+			height: 300px;
+			border: 1px solid black;
+			margin-top: 10px;
+			display: none;
+		}
+		.tab ul li.active{
+			background: pink;
+		}
+		.tab ul li.current{
+			background: orange;
+		}
+	</style>
+</head>
+<body>
+	<div class="tab">
+		<ul class="btn clearfix">
+			<li class="current">btn1</li>
+			<li>btn2</li>
+			<li>btn3</li>
+			<li>btn4</li>
+		</ul>
+		<ul class="content">
+			<li style="display: block;">content1</li>
+			<li>content2</li>
+			<li>content3</li>
+			<li>content4</li>
+		</ul>
+	</div>
+	<div class="tab">
+		<ul class="btn clearfix">
+			<li class="current">btn1</li>
+			<li>btn2</li>
+			<li>btn3</li>
+			<li>btn4</li>
+		</ul>
+		<ul class="content">
+			<li style="display: block;">content1</li>
+			<li>content2</li>
+			<li>content3</li>
+			<li>content4</li>
+		</ul>
+	</div>
+</body>
+<script src="jquery-1.12.4.js"></script>
+<script>
+	;(function($){
+		$.fn.extend({   			  
+			tab:function(options){
+				var  defaults={
+					activeClass:'active',
+					btnSelector:'.btn>li',
+					contentSelector:'.content>li',
+					eventType:'click'
+				}
+				options=$.extend(defaults,options);
+				this.each(function(){
+					var $tab=$(this);   //this是所有的tab元素
+					var $btns=$tab.find(options.btnSelector);
+					console.log($tab);
+					$btns.on(options.eventType,function(){
+						//console.log($(this));		//this属于具体的按钮
+						$(this).addClass(options.activeClass).siblings().removeClass(options.activeClass);  
+						var index=$(this).index();
+						$tab.find(options.contentSelector).eq(index).show().siblings().hide();
+						//console.log($tab);
+					})
+				});			
+			}
+		});
+	})(jQuery);
+	$(function(){
+		$('.tab').tab({
+			activeClass:'current',
+			btnSelector:'.btn>li',
+			contentSelector:'.content>li',
+			eventType:'mouseenter'
+		});
+	})
+</script>
+</html>

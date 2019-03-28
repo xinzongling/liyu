@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+
+		button{
+			width: 120px;
+			height: 60px;
+			margin-left: 50px;
+		}	
+		.btn{
+			margin-left: 300px;
+		}
+		.box{
+			width: 200px;
+			height: 200px;
+			background: red;
+			position: absolute;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+	<button class="btn">显示</button>
+<!-- 	<button>隐藏</button>
+<button>变大</button>
+<button>变色</button>
+<button>改变默认位置</button> -->
+</body>
+<script src="jquery-1.12.4.js"></script>
+<script src="ktao/显示隐藏插件/showHide.js"></script>
+<script src="ktao/显示隐藏插件/移动元素-插件封装.js"></script>
+<script src="自定义插件练习.js"></script>
+<script>
+	var $box=$('.box');
+	$('.box').myplug({
+		js:true,
+		mode:'fade',
+		Js:true
+	});
+	$('button').eq(0).on('click',function(){
+		$box.myplug('myShow');
+	});
+	/*
+	$('button').eq(1).on('click',function(){
+		$box.myplug('myHide');
+	});
+	*/
+	$('button').eq(0).on('click',function(){
+		$box.myplug('setCss',{width:'300px',height:'300px'});
+	});
+	$('button').eq(0).on('click',function(){
+		$box.myplug('setCss',{background:'green'});
+	});
+	$('button').eq(0).on('click',function(){
+		$box.myplug('setCss',{left:'300px',top:'300px'});
+	});
+	$box.on('click',function(){
+		$box.myplug('toggle');
+	})
+</script>
+</html>

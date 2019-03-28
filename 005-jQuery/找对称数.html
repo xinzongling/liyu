@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>对称数</title>
+</head>
+<body>
+</body>
+<script>
+	/*
+	function getNumber(n1,n2){
+		var arr=[];
+		for(var i=n1;i<=n2;i++){
+			if(i<=9){		//0-9  一位数
+				arr.push(i);
+			}else if(i<=99){		//10-99  二位数
+				i=i+'';
+				if(i[0]==i[1]){
+					i=i/1;
+					arr.push(i);
+				};
+			}else if(i<=999){    //100-999  三位数
+				i=i+'';
+				if(i[0]==i[2]){
+					i=i/1;
+					arr.push(i);
+				};
+			}else if(i<=9999){	//1000-9999 四位数
+				i=i+'';
+				if(i[0]==i[3]&&i[1]==i[2]){
+					i=i/1;
+					arr.push(i);
+				};
+			}
+		};
+		return arr;
+	};
+	*/
+	function getNumber(n1,n2){
+		var arr=[];
+		for(var i=n1;i<=n2;i++){
+			i=i+'';			
+			if(i.split('').join()==i.split('').reverse().join()){
+				arr.push(i);
+			};			
+		};
+		return arr;
+	}
+	var p1=getNumber(1,10000);
+	console.log(p1);
+	console.log(typeof p1[20]);
+   
+/*
+    var str='hello';
+    var str1=str.split('');
+    console.log(str1)
+
+    var str2=str1.reverse();
+    console.log(str2);
+
+    var str3=str2.join();
+    console.log(str3);
+*/
+/*
+var a=121+'';
+console.log(a.split(''));
+console.log(typeof a.split('').reverse().join());
+console.log(a.split('')==a.split('').reverse());
+*/
+</script>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>插件封装练习</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		button{
+			width: 100px;
+			height: 60px;
+		}
+		.box{
+			width: 50px;
+			height: 50px;
+			background: red;
+			margin-top: 120px;
+		}
+	</style>
+</head>
+<body>
+	<button>设置</button>
+	<button>获取</button>
+	<div class="box"></div>
+	<div class="box"></div>
+</body>
+<script src="./jquery-1.12.4.js"></script>
+<script>
+	//css,当传一个参数，获取值，两个参数则设置
+	/*$.fn.extend({
+		myCss:function(attr,value){
+			//this属于包含DOM元素的jQuery对象
+			this.each(function(){
+				$this=$(this);
+				if(attr&&!value){
+					console.log($this.css(attr));
+				}else if(attr&&value){
+					this.style[attr]=value;
+				}
+			});
+			return this;
+		}
+	});*/
+
+	$.fn.extend({
+		myCss:function(options){
+			//this属于包含DOM元素的jQuery对象
+			this.each(function(){
+				$this=$(this);
+				if(typeof options=='object'){
+					for(key in options){
+						this.style[key]=options[key];
+					}
+				}else if(typeof options=='string'){
+					console.log($this.css(options));
+				}				
+			});
+			return this;
+		}
+	});
+
+
+	$elem=$('.box');
+	$elem.myCss('width');
+	/*$('button').eq(0).on('click',function(){
+		console.log($elem.myCss('width','800px'));
+	});
+	$('button').eq(1).on('click',function(){
+		console.log($elem.myCss('width'));
+	});*/
+	$('button').eq(0).on('click',function(){
+		console.log($elem.myCss({
+			width:'220px',
+			height:'120px'
+		}));
+	});
+	$('button').eq(1).on('click',function(){
+		console.log($elem.myCss('width'));
+	});
+
+	
+</script>
+</html>

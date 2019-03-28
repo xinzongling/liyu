@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="box">我是盒子</div>
+	<div class="box">我是盒子</div>
+	<div class="box">我是盒子</div>
+</body>
+<!-- <script src="jquery-1.12.4.js"></script> -->
+ <script src="jQuery结构分析.js"></script>
+ <script>
+
+window.onload=function(){
+	console.log('onload......')
+};
+$(function(){
+	console.log('$....')
+});
+window.addEventListener('DOMContentLoaded',function(){
+	console.log('DOMContentLoaded....')
+})
+
+
+
+
+
+
+
+
+console.log('1::',$(false));
+console.log('1::',$(true));
+console.log('2::',$(''));
+console.log('3::',$(0));
+console.log('4::',$(undefined));
+console.log('5::',$(null));
+console.log('6::',$(NaN));
+
+console.log('7::',$(function(){}));
+
+console.log('8::',$('<h1>标题</h1><span>我是span</span><button>我是按钮</button>'));
+
+console.log('9::',$('div'));
+
+	
+	
+
+	var arr=[1,2,3];
+	console.log('10::',$(arr));
+
+	var likeArr=[1,2,3];
+	console.log('11::',$(likeArr));
+
+	var obj={
+		name:"tom",
+		age:18
+	}
+	console.log('12::',$(obj));
+
+	console.log('13::',$('div').get(1));
+	console.log('14::',$('div').get(-1));
+	console.log('15::',$('div').get());
+
+	function person(name,age){
+		this.name=name;
+		this.age=age;
+	};
+	person.prototype={
+		constructor:person,
+		showName:function(){
+			console.log('i am '+this.name)
+		},
+		showAge:function(){
+			console.log('i am '+this.age)
+		}
+	}
+	person.showClass=function(){
+		console.log('grade 11.....')
+	}
+	var p1=new person('tom',18)
+	console.log(p1);
+	p1.showName()
+	p1.showAge()
+	person.showClass()
+
+	var obj1={
+		name:'tom',
+		age:12
+	}
+	var obj2={
+		name:'leo',
+		age:18
+	}
+	console.log(obj1)
+	console.log(obj2)
+	obj1=obj2;
+	console.log(obj1)
+	console.log(obj2);
+
+
+	var arr=[1,2,3];
+	console.log(arr);
+
+
+
+	$.extend({
+		test:function(){
+			console.log('test.....')
+		}
+	});
+	$.test();
+</script>
+</html>
