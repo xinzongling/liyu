@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字面量对象简洁语法.html</title>
+</head>
+<body>
+</body>
+<script>
+	/*
+	var obj={
+		name:'name',
+		age:'age'
+	};
+	console.log(obj)
+	*/
+	
+	var name='tom';
+	var age=18;
+	var obj={
+		name,
+		age
+	};
+	console.log(obj);
+
+
+	/*
+	var obj={
+		name:'tom',
+		age:18,
+		showName(){
+			console.log('I am '+this.name);
+		},
+		showAge(){
+			console.log('I am '+this.age+' years old');
+		}
+	};
+	obj.showName();
+	obj.showAge();
+
+	*/
+
+/*
+	var obj={
+		name:'tom',
+		age:18,
+		showName:()=>{
+			console.log(this) //this为window,这里不能用箭头函数
+			console.log('I am '+this.name);
+		},
+		showAge:()=>{
+			console.log(this)
+			console.log('I am '+this.age+' years old');
+		}
+	};
+	obj.showName();
+	obj.showAge();
+*/	
+
+
+</script>
+</html>

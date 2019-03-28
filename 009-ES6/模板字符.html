@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模板字符.html</title>
+</head>
+<body>
+	<button>点我</button>
+</body>
+<script>
+	var button=document.getElementsByTagName('button')[0];
+	var username='tom';
+	/*
+	button.onclick=function(){
+		var html='<ul>';
+		html+='<li>'+username+'</li>';
+		html+='<li>'+username+'</li>';
+		html+='<li>'+username+'</li>';
+		html+='<li>'+username+'</li>';
+		html+='</ul>';
+		document.body.innerHTML=html;
+	}*/
+
+/*
+	button.onclick=function(){
+		var html='<ul>'
+		+'<li>'+username+'</li>'
+		+'<li>'+username+'</li>'
+		+'<li>'+username+'</li>'
+		+'<li>'+username+'</li>'
+		html+='</ul>';
+		document.body.innerHTML=html;
+	}
+	*/
+	
+	/*
+	button.onclick=function(){
+		var html=`<ul>
+		<li>${username}</li>
+		<li>${username}</li>
+		<li>${username}</li>
+		<li>${username}</li>
+		</ul>`;
+		document.body.innerHTML=html;
+	}*/
+</script>
+</html>

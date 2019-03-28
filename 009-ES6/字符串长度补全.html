@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符串长度补全.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	//如果某个字符串不够指定长度，会在头部或尾部补全。
+	//padStart()用于头部补全，padEnd()用于尾部补全。
+	//第一个参数指字符串总长度，第二个参数指以什么内容补全。
+	console.log('123'.padStart(5,'abc'));
+	console.log('123'.padEnd(5,'abc'));
+	console.log('1'.padEnd(5,'abc'));
+
+	//可以用来对用户输入的年月日信息进行补全
+	//如果不够，进行补全
+	console.log('30'.padStart(10,'YYYY-MM-DD'));
+	console.log('12-30'.padStart(10,'YYYY-MM-DD'));
+
+	//数字补零
+	console.log('5'.padStart(5,0));
+	console.log('213'.padStart(5,0));
+
+	function show(n,m){
+		for(var i=n;i<=m;i++){
+			i=i+'';
+			console.log(i.padStart(10,0))
+		}
+	};
+	show(2,121);
+</script>
+</html>

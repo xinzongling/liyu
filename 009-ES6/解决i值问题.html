@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>解决i值问题.html</title>
+	<style>
+		button{
+			width: 80px;
+			height: 50px;
+		}
+	</style>
+</head>
+<body>
+	<button>button1</button>
+	<button>button2</button>
+	<button>button3</button>
+	<button>button4</button>
+</body>
+<script src="jQuery/jquery-1.12.4.min.js"></script>
+<script>
+	var oBtns=document.getElementsByTagName('button');
+	/*
+	for(var i=0;i<oBtns.length;i++){
+		oBtns[i].index=i;
+		oBtns[i].onclick=function(){
+			console.log(this.index);
+		}
+	}
+	*/
+	/*
+	for(var i=0;i<oBtns.length;i++){
+		(function(i){
+			oBtns[i].onclick=function(){
+				console.log(i);
+			};
+		})(i);
+	}*/
+	$.map(oBtns,function(value,index){
+    	return oBtns[index].onclick=function(){
+			console.log(index);
+		}
+	});
+	/*
+	for(let i=0;i<oBtns.length;i++){
+		oBtns[i].index=i;  //let 块级作用域
+		oBtns[i].onclick=function(){
+			console.log(this.index);
+		}
+	}*/
+</script>
+</html>

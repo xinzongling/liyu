@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ES8对象新增的方法.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	//Object.keys(),Object.entries(),Object.values()
+	//Object.getOwnPropertyDescriptors(),
+	//Object.assign(),Object.is()
+	var obj={
+		name:'tom',
+		age:18,
+		showName(){
+			console.log('I am '+this.name);
+		},
+		showAge(){
+			console.log('I am '+this.age+' years old');
+		}
+	};
+	obj.showCountey=function(){
+		console.log('I am in China')
+	}
+	console.log(Object.keys(obj));
+	console.log(Object.entries(obj));
+	console.log(Object.values(obj));
+	console.log(Object.getOwnPropertyDescriptors(obj));
+	var obj2={
+		mode:'slide'
+	}
+	var DEFAULTS={
+		js:false,
+		mode:'slide'
+	};
+	//Object.assign和jQuery对象的合并差不多
+	//console.log(Object.assign({},DEFAULTS,obj2));
+	
+	/*
+
+	var m1=Object.assign(DEFAULTS,obj2);
+	//如果不加{},实际上改变了DEFAULTS的值。
+	console.log(m1);
+	m1.interval=3000;
+	console.log(m1,DEFAULTS,obj2);
+	*/
+
+/*
+	var m2=Object.assign({},DEFAULTS,obj2);
+	//如果加上{},不会改变了DEFAULTS的值,
+	//相当于新创建了一个对象,然后把合并后的对象放到新创建的对象中
+	console.log(m2);
+	m2.interval=3000;
+	console.log(m2,DEFAULTS,obj2);
+
+*/
+/*
+	//可以copy对象
+	var m3=Object.assign({},DEFAULTS);
+	console.log(m3);
+	m3.interval=3000;
+	console.log(m3,DEFAULTS);
+*/
+
+
+/*
+	//浅copy
+	var obj3={
+		age:20,
+		name:'tom',
+		friend:{
+			username:'perter'
+		}
+	};
+
+	var m4=Object.assign({},obj3);
+	console.log('1::',m4);
+	m4.friend.username='leo';
+	console.log('2::',m4,obj3);
+*/
+
+/*
+	//copy 数组
+	var arr1=[11,22,33];
+	var arr3=Object.assign([],arr1);
+	console.log(arr3);
+	arr3.push(44);
+	console.log(arr1,arr3)
+*/
+
+/*	//浅copy
+	var arr1=[11,22,33,{username:'perter'}];
+	var arr3=Object.assign([],arr1);
+	console.log(arr3);
+	arr3[3].username='leo';
+	console.log(arr1,arr3)
+*/
+
+	/*	//合并数组
+	var arr1=[11,22,33];
+	var arr2=[110,220];
+	var arr3=Object.assign([],arr1,arr2);//以下标为准，开始合并
+	console.log(arr1,arr3);
+	*/
+/*
+	var arr1=[11,22,33,25,68,79,20,45];
+	var arr2=[110,220,330,440];
+	for(var i=0;i<arr1.length;i++){
+		arr2.unshift(0);
+	};
+	console.log(arr2);
+	var arr3=Object.assign([],arr2,arr1);
+	console.log(arr1,arr3);
+*/
+	
+
+/*
+	//Object.is();
+	if(+0==-0){
+		console.log('1::',true);
+	};
+	if(+0===-0){
+		console.log('2::',true);
+	};
+	if(Object.is(+0,-0)){
+		console.log('3::',true);
+	};
+*/
+
+/*
+	if(NaN==NaN){
+		console.log('1::',true);
+	};
+	if(Object.is(NaN,NaN)){
+		console.log('3::',true);
+	};
+*/
+
+	if(undefined==undefined){
+		console.log('1::',true);
+	};
+	if(Object.is(undefined,undefined)){
+		console.log('3::',true);
+	};
+</script>
+</html>

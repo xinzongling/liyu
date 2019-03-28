@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>对象继承回顾.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	function Person(name,age,sex){ //构造函数不存在函数的提升
+		this.name=name;
+		this.age=age;
+		this.sex=sex;
+	};
+	Person.prototype.showName=function(){
+		console.log('I am '+this.name);
+	};
+	Person.prototype.showAge=function(){
+		console.log('I am '+this.age+' years old');
+	};
+	Person.showCountry=function(){
+		console.log('I am in China')
+	}
+/*
+	var p=new Person('tom',18,'male');
+	p.showSex=function(){
+		console.log('I am '+this.sex)
+	}
+	p.showName();
+	p.showSex();
+	console.log(p)
+	Person.showCountry();
+*/
+
+	function Student(name,age,sex){
+		Person.call(this,name,age,sex);
+	};
+	Student.prototype=Object.create(Person.prototype);
+	Student.prototype.constructor=Student;
+
+	var s=new Student('tom',18,'male');
+	s.showName();
+	s.showAge();
+	Person.showCountry();
+	s.showSex=function(){
+		console.log('I am '+this.sex)
+	};
+	s.showSex()
+</script>
+</html>

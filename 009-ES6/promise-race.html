@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>promise-race.html</title>
+</head>
+<body>	
+</body>
+<script>
+	function getLoadData(delay){
+		return new Promise((resove,reject)=>{
+			setTimeout(function(){
+				resove(delay);
+			},delay);
+		});
+	};
+	var arr=[1000,200,300,20,3000];
+	let p=arr.map(function(url,index){
+		return getLoadData(url);
+	});
+	Promise.race(p)
+	.then((data)=>{
+		console.log(data);
+	});
+</script>
+</html>

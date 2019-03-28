@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>generator.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+
+	/*
+	function * gen(){
+		console.log('gen...');
+		yield 'get data1....';
+		console.log('get data1...');
+		yield 'get data2....';
+		console.log('get data2...');
+		yield 'get data3....';
+		console.log('get data3...');
+		return 'get data3....';
+	};
+	//console.log(gen);
+	//console.log(typeof gen);
+	//console.log(gen());
+
+	let p=gen();//p为遍历对象
+	console.log(p);
+
+	console.log(p.next());
+	console.log(p.next());
+	console.log(p.next());
+	console.log(p.next());
+
+	*/
+
+	/*
+
+		function * gen(x){
+		console.log(x);
+		let y= yield (x+15);
+		console.log(y);
+		let z= yield (y+30);
+		console.log(z);
+		return (x+y+z);
+	};
+
+	let p=gen(10);
+	console.log(p.next());
+	console.log(p.next(60));
+	//next方法可以带一个参数，该参数就会被当作上一个yield表达式的返回值
+	console.log(p.next());
+
+	*/
+
+	//for of 循环
+	function * gen(x){
+		yield 1;
+		yield 2;
+		yield 3;
+		yield 4;
+		yield 5;
+	};
+	let p=gen();
+	//console.log(p.next());
+	for(let i of p){
+		console.log(i)
+	}
+
+</script>
+</html>

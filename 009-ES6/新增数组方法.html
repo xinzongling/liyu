@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>新增数组方法.html</title>
+</head>
+<body>
+	<button></button>
+	<button></button>
+	<button></button>
+	<button></button>
+	<button></button>
+	<button></button>
+</body>
+<script>
+	//Array.from(),Array.prototype.find(),
+	//Array.prototype.findIndex(),
+	//ES7语法,Array.prototype.includes().
+
+	var likeArr={
+		0:'aaa',
+		1:'bbb',
+		2:'ccc',
+		length:3
+	};
+	console.log(Array.from(likeArr));
+
+
+	function fn(){
+		//console.log(arguments);
+		console.log(Array.from(arguments));
+	}
+	fn(1,2,3);
+
+
+	var button=document.getElementsByTagName('button');
+	console.log(button);
+	console.log(Array.from(button));
+
+	Array.from(button).map((value,index)=>{
+		console.log(value,index)
+	})
+
+
+	var arr=[11,22,33,38];
+		//console.log(arr)
+
+	console.log(arr.find(n=>n>10))//11
+	console.log(arr.find(n=>n>22))//33
+	console.log(arr.find(n=>n>50))//undefined
+
+
+	console.log(arr.findIndex(n=>n>10))//0
+	console.log(arr.findIndex(n=>n>22))//2
+	console.log(arr.findIndex(n=>n>50))//-1
+
+	console.log(arr.includes(33));//true
+	console.log(arr.includes(22,2))//false
+	console.log(arr.includes(22,1))//true
+	console.log(arr.includes(100))//false
+	console.log(arr.includes('22'))//false //属于全等比较
+</script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>class类的继承练习.html</title>
+</head>
+<body>	
+</body>
+<script>
+	class Person{
+		constructor(name,age){
+			this.name=name;
+			this.age=age;
+		}
+		showName(){
+			console.log('I am '+this.name);
+		}
+		showAge(){
+			console.log('I am '+this.age+' years old');
+		}
+		static showCountry(){
+			console.log('I am in China');
+		}
+	};
+	class Student extends Person{
+		constructor(name,age,sex){
+			super(name,age);
+			this.sex=sex;
+		}
+		showSex(){
+			console.log('I am '+this.sex);
+		}
+	}
+	var s=new Student('tom',18,'male');
+	console.log(s)
+	s.showName();
+	s.showAge();
+	s.showSex();
+	Student.showCountry();
+</script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>symbol.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	/*
+ let s = new Symbol()
+ console.log(s)	//Symbol不是一个构造函数							*/		
+ /*
+ let s1 = Symbol('name')
+ let s2 = Symbol('name')
+ console.log(s1===s2)	//Symbol值唯一
+ */
+ /*
+ let s1 = Symbol('name')
+  console.log(s1)
+  */
+
+  var s1=Symbol('username');
+  var s2=Symbol('username');
+  var obj={
+  	age:'18'
+  }
+  obj[s1]='tom';
+  obj[s2]='leo';
+  console.log(obj)
+
+  for(key in obj){
+  	console.log(key,obj[key])
+  }
+  var arr=Reflect.ownKeys(obj);
+  console.log(arr)
+  
+  arr.forEach(function(value,key){
+  	console.log(value,key)
+  })
+
+  console.log(Object.getOwnPropertyDescriptors(obj))
+</script>
+</html>

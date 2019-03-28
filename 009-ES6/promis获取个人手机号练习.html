@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>promis获取个人手机号练习.html</title>
+</head>
+<body>	
+</body>
+<script src="jQuery/jquery-1.12.4.js"></script>
+<script>
+	let getDataPromise=(url)=>{
+		return new Promise((resolve,reject)=>{
+			$.get(url,data=>{
+				resolve(data);
+			});
+		});
+	};
+	getDataPromise('http://127.0.0.1:3000')
+	.then((data)=>{
+		return getDataPromise(data.kuazhu_url);
+	})
+	.then((data1)=>{
+		console.log(data1.userInfo.phoneNum);
+	});	
+</script>
+</html>

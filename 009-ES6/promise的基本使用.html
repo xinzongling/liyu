@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>promise的基本使用.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+
+	//1,promise里面的函数在new的时候就已经执行了
+	var promise=new Promise((resove,reject)=>{
+		console.log('new Promise...');
+		//2,执行异步请求
+		resove('success...');
+		//reject('error..');
+	});
+	console.log(promise);
+
+	//3,通过promise的实例对返回的数据进行处理
+	promise
+	.then((data)=>{
+		console.log(data);
+	},(err)=>{	//第二个参数可以省略
+		console.log(err);
+	})
+</script>
+</html>

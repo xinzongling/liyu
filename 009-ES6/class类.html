@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>class类.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	class Person{
+		constructor(name,age,sex){
+			this.name=name;
+			this.age=age;
+			this.sex=sex;
+		}
+		showName(){
+			console.log('I am '+this.name);
+		}
+		showAge(){
+			console.log('I am '+this.age+' years old');
+		}
+		static showCountry(){
+			console.log('I am in China');
+		}
+	};
+
+	/*
+	//console.log(typeof Person)
+	var p=new Person('tom',18);
+	p.showName();
+	p.showAge();
+	Person.showCountry();
+	*/
+
+	//继承
+	/*
+	class Student extends Person{  //无法继承构造函数上的方法
+		constructor(name,age,sex){
+			super(name,age,sex);
+		}
+		showSex(){
+			console.log('I am '+this.sex);
+		}
+	}
+	var s=new Student('tom',18,'male');
+	s.showName();
+	s.showAge();
+	s.showSex();
+	Person.showCountry();
+	*/
+
+	class Student extends Person{
+	 //子类可以继承父类构造函数上的方法
+	 //静态方法继承到了子类的构造函数中了
+		showSex(){
+			console.log('I am '+this.sex);
+		}
+	}
+	var s=new Student('tom',18,'male');
+	s.showName();
+	s.showAge();
+	s.showSex();
+	Student.showCountry();
+	console.log(s)
+</script>
+</html>

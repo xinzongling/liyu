@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>利用generator函数处理异步.html</title>
+</head>
+<body>
+	
+</body>
+<script src="jQuery/jquery-1.12.4.js"></script>
+<script>
+	function getDataPromise(url){
+		return new Promise((resolve,reject)=>{
+			$.get(url,data=>{
+				resolve(data);
+			});
+		})
+	};
+	function * gen(url){
+		let data1=yield getDataPromise(url);
+		let data2=yield getDataPromise(data1);
+		let data3=yield getDataPromise(data2);
+	};
+	let p=gen('https://api.github.com/users/kuazhu');
+	//console.log(p.next().value)
+	p.next().value
+	.then((data1)=>{
+		console.log(data1);
+		return p.next(data1.followers_url).value;
+	})
+	.then((data2)=>{
+		console.log(data2);
+		return p.next(data2[0].followers_url).value;
+	})
+	.then((data3)=>{
+		console.log(data3);
+	})
+</script>
+</html>

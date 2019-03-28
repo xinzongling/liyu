@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>promise-all.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	function getLoadImg(url){
+		return new Promise((resove,reject)=>{
+			var img=new Image();
+			img.onload=function(){
+				resove('resolve::'+url);
+			};
+			img.onerror=function(){
+				reject(url);
+			}
+			img.src=url;
+		});
+	};
+	var arrImgs=['images/images/1.png','images/images/2.png','images/images/3.png','images/images/4.png'];
+
+	let p=arrImgs.map(function(url,index){
+		return getLoadImg(url);
+	});
+
+	Promise.all(p)
+	.then((data)=>{
+		console.log(data);
+	});
+</script>
+</html>

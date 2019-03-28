@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>promise对象上的方法</title>
+</head>
+<body>
+	
+</body>
+<script>/*
+	//1,promise里面的函数在new的时候就已经执行了
+	var promise=new Promise((resove,reject)=>{
+		console.log('new Promise...');
+		//2,执行异步请求
+		resove('success...');
+		//reject('error..');
+	});
+	console.log(promise);
+*/
+	//3,通过promise的实例对返回的数据进行处理
+	//promise返回的是一个实例对象，与第一个promise不同
+	//而且第二个promise中的data由第一个promise的return决定
+	/*
+	var p1=promise
+	.then((data)=>{
+		console.log(data);
+		return data
+	},(err)=>{	//第二个参数可以省略
+		console.log(err);
+	});
+	console.log('p1...',p1);
+	console.log(p1==promise);
+
+	p1
+	.then((data)=>{
+		console.log(data);
+	},(err)=>{	//第二个参数可以省略
+		console.log(err);
+	})
+	*/
+
+
+
+	var promise=new Promise((resove,reject)=>{
+		//resove('success...');
+		reject('error..');
+	});
+
+	promise
+	.then((data)=>{
+		console.log(data);
+	},(err)=>{
+		console.log(err);
+	})
+	.catch((err)=>{
+		console.log('err!!!....');
+	})
+	.finally(()=>{
+		console.log('finally....');
+	})
+	
+</script>
+</html>

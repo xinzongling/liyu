@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>通过promise加载图片.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	/*
+	var img=new Image();
+	img.onload=function(){
+		console.log('img loaded..')
+	};
+	img.onerror=function(){
+		console.log('img loaded error..')
+	}
+	img.src='./images/dog.jpg';
+	*/
+/*
+	function loadImgs(url){
+		var img=new Image();
+		img.onload=function(){
+			console.log('img loaded..')
+		};
+		img.onerror=function(){
+			console.log('img loaded error..')
+		}
+		img.src=url;
+	}
+
+	loadImgs('./images/dog.jpg');
+
+*/
+
+/*
+function loadImgs(url,success,error){
+		var img=new Image();
+		img.onload=function(){
+			success(url);
+		};
+		img.onerror=function(){
+			error(url)
+		}
+		img.src=url;
+	}
+
+	loadImgs('./images/dog.jpg',(url)=>{
+		console.log(url,'img loaded..')
+	},(url)=>{
+		console.log(url,'img loaded error..')
+	});
+
+*/
+
+/*
+	var promise=new Promise((resove,reject)=>{
+		var img=new Image();
+		img.onload=function(){
+			resove('./images/dog.jpg');
+		};
+		img.onerror=function(){
+			reject('./images/dog.jpg')
+		}
+		img.src='./images/dog.jpg';
+	});
+	promise
+	.then((url)=>{
+		console.log(url,'img loaded..')
+	},(url)=>{
+		console.log(url,'img loaded error..')
+	})
+
+*/
+	function getLoadImg(url){
+		return new Promise((resove,reject)=>{
+			var img=new Image();
+			img.onload=function(){
+				resove(url);
+			};
+			img.onerror=function(){
+				reject(url);
+			}
+			img.src=url;
+		});
+	};
+	getLoadImg('./images/dog.jpg')
+	.then((url)=>{
+		console.log(url,'img loaded..')
+	},(url)=>{
+		console.log(url,'img loaded error..')
+	});
+</script>
+</html>

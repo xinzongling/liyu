@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>箭头函数.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	/*
+	let sum =(x,y)=>{
+        console.log(x,y);
+        return x + y;
+    }
+
+    sum(1,2)
+
+    */
+    /*
+    let sum =(x,y)=> x + y;
+    console.log(sum(1,2));*/
+/*
+    let fn = x =>{
+        console.log(x);
+        return x + 10;
+    }
+    fn(5)*/
+
+    var arr=[1,8,99,56,94,53,64,255];
+    console.log(arr);
+    /*
+    var arr1=arr.sort(function(n1,n2){
+    	return n1-n2;
+    });*/
+    /*
+    var arr1=arr.sort((n1,n2)=>{
+    	return n1-n2;
+    });*/
+    /*
+     var arr1=arr.sort((n1,n2)=>n1-n2);*/
+    //console.log(arr1)
+/*
+    function Timer(id){
+        this.id = id;       
+        setTimeout(function(){
+            console.log(this,this.id);//window 99
+        },100)  
+    }
+    var id = 99;
+    let t = new Timer(100);*/
+	/*function Timer(id){
+        this.id = id;       
+        setTimeout(function(){
+            console.log(this,this.id);//window 99
+        }.bind(this),100)  
+    }
+    var id = 99;
+    let t = new Timer(100);*/
+    /*
+    function Timer(id){
+        this.id = id;       
+        setTimeout(()=>{
+            console.log(this,this.id);//window 99
+        },100)  
+    }
+    var id = 99;
+    let t = new Timer(100);*/
+
+    /*
+    var obj={
+    	age:18,
+    	fn1:function(){
+    		return ()=>{
+    			return this.age
+    		}
+    	}
+    }
+    console.log(obj.fn1()());*/
+
+
+/*
+    function show(){
+
+    };
+    console.log(show.prototype)
+*/
+
+/*
+function show(){
+    console.log('11')
+};
+
+new show()
+
+*/
+
+/*
+var show=()=>{
+    console.log('11')
+};
+
+new show()
+*/
+
+
+/*
+var show=()=>{
+
+};
+console.log(show.prototype)*/
+/*
+function show(){
+    console.log(arguments)
+};
+show(11,223,33)
+
+*/
+/*
+var show=()=>{
+    console.log(arguments)
+};
+show(11,223,33)
+
+*/
+
+/*
+show()
+function show(){
+    console.log('11')
+};
+*/
+
+show()
+var show=()=>{
+    console.log('11')
+};
+
+</script>
+</html>
