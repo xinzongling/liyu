@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>scroll-bar.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.f1{
+			width: 300px;
+			height: 30px;
+			background: gray;
+		}
+		.s1{
+			width: 30px;
+			height: 30px;
+			background: pink;
+			position: absolute;
+			cursor: pointer;
+		}
+		.box{
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="f1">
+		<div class="s1"></div>
+	</div>
+	<div class="box"></div>
+</body>
+<script>
+	var f1=document.querySelector('.f1');
+	var s1=document.querySelector('.s1');
+	var box=document.querySelector('.box');
+	s1.onmousedown=function(ev){
+		var iev=ev||event;
+		var dex=iev.clientX-s1.offsetLeft;
+		var dey=iev.clientY-s1.offsetTop;
+		document.onmousemove=function(ev){
+			var iev=ev||event;
+			var l=iev.clientX-dex;
+			if(l<0){
+				l=0;
+			}else if(l>f1.offsetWidth-s1.offsetWidth){
+				l=f1.offsetWidth-s1.offsetWidth;
+			}
+			s1.style.left=l+'px';
+			var scall=l/(f1.offsetWidth-s1.offsetWidth);
+			box.style.width=scall*500+'px';
+			box.style.height=scall*500+'px';
+			box.style.opacity=scall;
+		};
+		document.onmouseup=function(){
+			document.onmousemove=null;
+			document.onmouseup=null;
+		}
+	}
+</script>
+</html>

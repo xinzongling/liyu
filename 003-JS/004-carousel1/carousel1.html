@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轮播图1</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		li{
+			list-style: none;
+		}
+		.leftBtn,.rightBtn{
+			position: absolute;
+			width: 40px;
+			height: 80px;
+			font-size: 24px;
+			font-weight: 500;
+			text-align: center;
+			line-height: 80px;
+			cursor: pointer;
+			background: #6f212e;
+			color: #fff;
+			top: 50%;
+			margin-top: -40px;
+			z-index: 100;
+		}
+		.leftBtn{
+			left: 0;
+		}
+		.rightBtn{
+			right: 0;
+		}
+		.oBottomBtn{
+			position: absolute;
+			right: 50%;
+			bottom: 10px;
+			z-index: 100; 
+		}
+		.oBottomBtn li{
+			float: left;
+			width: 10px;
+			height: 10px;
+			background: red;
+			margin-left: 10px;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		.oBottomBtn li.active{
+			background: green;
+		}
+	</style>
+</head>
+<body>
+	<div id="box1"></div>
+</body>
+<script src="tools.js"></script>
+<script>
+	function carousel(option){
+		//1,罗列属性
+		this.oBox=document.getElementById(option.id);
+		this.oUl=null;
+		this.aImg=option.aImg;
+		this.width=option.width;
+		this.height=option.height;
+		this.leftBtn=null;
+		this.rightBtn=null;
+		this.now=0;
+		this.oBottomBtn=null;
+		this.playDuration=option.playDuration;
+		//2，初始化
+		this.init();
+		//3，绑定事件
+		this.bindEvent();
+		this.tab();
+		if(this.playDuration){
+			this.autoPlay();
+		}
+	}
+	carousel.prototype.init=function(){
+		this.oUl=document.createElement('ul');
+		this.oBox.appendChild(this.oUl);
+		this.oBox.style.position='relative';
+		this.oBox.style.height=this.height+'px';
+		this.oBox.style.width=this.width+'px';
+		//li和img
+		for(var i=0;i<this.aImg.length;i++){
+			var oLi=document.createElement('li');			
+			var oImg=document.createElement('img');
+			oImg.src=this.aImg[i];		
+			oLi.style.position='absolute';
+			oLi.style.left=0;
+			oLi.style.top=0;
+			//默认显示第一张
+			if(i==1){
+				oLi.style.zIndex=50;
+				oLi.style.opacity=1;
+			}else{
+				oLi.style.zIndex=0;
+				oLi.style.opacity=0;
+			}
+			oImg.style.width=this.width+'px';
+			oImg.style.height=this.height+'px';
+			oLi.appendChild(oImg);
+			this.oUl.appendChild(oLi);
+		}
+		//左右按钮
+		this.leftBtn=document.createElement('span');
+		this.rightBtn=document.createElement('span');
+		this.oBox.appendChild(this.leftBtn);
+		this.oBox.appendChild(this.rightBtn);
+		this.leftBtn.className='leftBtn';
+		this.rightBtn.className='rightBtn';
+		this.leftBtn.innerHTML='&lt;';
+		this.rightBtn.innerHTML='&gt;';
+		//创建底部的按钮
+		this.oBottomBtn=document.createElement('ul');
+		this.oBox.appendChild(this.oBottomBtn);
+		this.oBottomBtn.className='oBottomBtn';
+		this.oBottomBtn.style.marginLeft=this.oBottomBtn.offsetWidth*0.5+'px';
+		for(var i=0;i<this.aImg.length;i++){
+			var oLi=document.createElement('li');
+			if(i==0){
+				oLi.className='active';
+			}
+			this.oBottomBtn.appendChild(oLi);	
+		}
+	}
+	carousel.prototype.bindEvent=function(){
+		//右边的按钮
+		this.rightBtn.onclick=function(){
+			this.now++;
+			if(this.now>=this.aImg.length){
+				this.now=0;
+			};
+			this.tab();
+		}.bind(this);
+		//左边的按钮
+		this.leftBtn.onclick=function(){
+			this.now--;
+			if(this.now<0){
+				this.now=this.aImg.length-1;
+			};
+			this.tab();
+		}.bind(this);
+		//底部按钮
+		var _self=this;
+		for(var i=0;i<this.aImg.length;i++){
+			this.oBottomBtn.children[i].index=i;
+			this.oBottomBtn.children[i].onclick=function(){
+				_self.now=this.index;
+				_self.tab();
+			};
+		}
+	}
+	carousel.prototype.autoPlay=function(){
+		var timer=setInterval(this.rightBtn.onclick,
+		this.playDuration);
+		this.oBox.onmouseover=function(){
+			clearInterval(timer);
+		};
+		this.oBox.onmouseout=function(){
+			timer=setInterval(this.rightBtn.onclick,
+			this.playDuration);
+		}.bind(this);
+	}
+	carousel.prototype.tab=function(){
+			for(var i=0;i<this.aImg.length;i++){
+				this.oUl.children[i].style.zIndex=0;
+				this.oUl.children[i].style.opacity=0;
+				this.oBottomBtn.children[i].className='';
+			}
+			this.oUl.children[this.now].style.zIndex=50;
+			/*this.oUl.children[this.now].style.opacity=1;*/
+			this.oBottomBtn.children[this.now].className='active';
+			animation(this.oUl.children[this.now],{opacity:100},false);
+	}
+	new carousel({id:'box1',
+					aImg:['images/1.jpg','images/2.jpg','images/3.jpg','images/4.jpg','images/5.jpg'],
+					width:872,
+					height:400,
+					playDuration:1000
+		})
+</script>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>面向对象实现拖拽</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		/* .box{
+			width: 200px;
+			height: 200px;
+			background: red;
+			position: absolute;
+			left: 0;
+			top: 0;
+		} */
+	</style>
+</head>
+<body>
+	<!-- <div class="box"></div> -->
+</body>
+<script>
+	
+	function Drag(option){
+		//罗列属性
+		this.box=document.createElement('div');
+		document.body.appendChild(this.box);
+		this.dex=0;
+		this.dey=0;
+		this.width=option.width;
+		this.height=option.height;
+		this.background=option.background;
+		//初始化
+		this.init();
+		//事件的绑定
+		this.bindEvent();
+	}
+	Drag.prototype.bindEvent=function(){
+		this.box.onmousedown=this.fnDown.bind(this);
+	}
+	Drag.prototype.init=function(){
+		this.box.style.width=this.width+'px';
+		this.box.style.height=this.height+'px';
+		this.box.style.background=this.background;
+		this.box.style.position='absolute';
+	}
+	Drag.prototype.fnDown=function(ev){
+		var iev=ev||event;
+		this.dex=iev.clientX-this.box.offsetLeft;
+		this.dey=iev.clientY-this.box.offsetTop;
+		document.onmousemove=this.fnMove.bind(this);
+		document.onmouseup=this.fnUp;
+	}
+	Drag.prototype.fnMove=function(ev){
+		var iev=ev||event;
+		this.box.style.left=iev.clientX-this.dex+'px';
+		this.box.style.top=iev.clientY-this.dey+'px';
+	}
+	Drag.prototype.fnUp=function(){
+		document.onmousemove=null;
+		document.onmouseup=null;
+	}
+	
+	new Drag({width:500,height:500,background:'red'});
+	new Drag({width:200,height:200,background:'pink'});
+
+	function LimitDrag(option){
+		Drag.call(this,option);
+	}
+	LimitDrag.prototype=Object.create(Drag.prototype);
+	LimitDrag.prototype.constructor=LimitDrag;
+	LimitDrag.prototype.fnMove=function(ev){
+		var iev=ev||event;
+		var l=iev.clientX-this.dex;
+		var t=iev.clientY-this.dex;
+		if(l<0){
+			l=0;
+		}else if(l>window.innerWidth-this.box.offsetWidth){
+			l=window.innerWidth-this.box.offsetWidth;
+		}
+		if(t<0){
+			t=0;
+		}else if(t>window.innerHeight-this.box.offsetHeight){
+			t=window.innerHeight-this.box.offsetHeight;
+		}
+		this.box.style.left=l+'px';
+		this.box.style.top=t+'px';
+	}
+	new LimitDrag({width:400,height:400,background:'green'});
+   
+   function show(){
+   	console.log('aa');
+   	return 1
+   }
+   var p=show();
+   console.log(p);
+</script>
+</html>

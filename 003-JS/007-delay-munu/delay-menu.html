@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.box{
+			width: 200px;
+			height: 200px;
+			background: red;
+			margin-left: 30px;
+			margin-top: 30px;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<input type="button" value="开始">
+	<div class="box"></div>
+</body>
+<script>
+	var input=document.querySelector('input');
+	var box=document.querySelector('.box');
+	var timer=null;
+	input.onmouseover=function(){
+		clearTimeout(timer);
+		box.style.display='block';
+	}
+	input.onmouseout=function(){
+		timer=setTimeout(function(){
+			box.style.display='none';
+		},300)
+	}
+	box.onmouseover=function(){
+		clearTimeout(timer);
+	}
+	box.onmouseout=function(){
+		timer=setTimeout(function(){
+			box.style.display='none';
+		},300)
+	}
+</script>
+</html>

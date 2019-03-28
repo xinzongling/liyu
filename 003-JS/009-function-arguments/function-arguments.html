@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test4.html</title>
+	<style>
+		.box{
+			width: 200px;
+			height: 200px;
+			border: 1px solid #ff6700;
+		}
+	</style>
+</head>
+<body>
+	<input type="button" value="设置颜色">
+	<input type="button" value="获取颜色">
+	<div class="box"></div>
+</body>
+<script>
+	function sum(){
+		var res='';
+		for(var i=0;i<arguments.length;i++){
+			res=res+arguments[i];
+		}
+		console.log(arguments);
+		return res;
+	};
+	var p=sum(1,2,3);
+
+	/*
+	function css(obj,attr,value){
+		if(value){
+			obj.style[attr]=value;
+		}else{
+			return getComputedStyle(obj,false)[attr];
+		}
+	}*/
+	function css(obj,attr,value){
+		if(arguments.length==3){
+			obj.style[attr]=value;
+		}else{
+			return getComputedStyle(obj,false)[attr];
+		}
+	}
+	var btn=document.querySelectorAll('input');
+	var box=document.querySelector('.box');
+	btn[0].onclick=function(){
+		css(box,'background','green');
+	}
+	btn[1].onclick=function(){
+		console.log(css(box,'background'));
+	}
+</script>
+</html>

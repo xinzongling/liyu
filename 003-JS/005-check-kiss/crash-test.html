@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>crash-test.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.box1{
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			background: pink;
+		}
+		.box2{
+			position: absolute;
+			width: 150px;
+			height: 150px;
+			left: 300px;
+			top: 220px;
+			background: green;
+		}
+	</style>
+</head>
+<body>
+	<div class="box1"></div>
+	<div class="box2"></div>
+</body>
+<script>
+	function checkKiss(obj1,obj2){
+		if((obj1.offsetLeft+obj1.offsetWidth)>obj2.offsetLeft
+				&&(obj1.offsetTop+obj1.offsetHeight)>obj2.offsetTop
+				&&(obj2.offsetLeft+obj2.offsetWidth)>obj1.offsetLeft
+				&&(obj2.offsetTop+obj2.offsetHeight)>obj1.offsetTop){
+				return true;
+			}else{
+				return false;
+			}
+	}
+	var box1=document.querySelector('.box1');
+	var box2=document.querySelector('.box2');
+	box1.onmousedown=function(ev){
+		var iev=ev||event;
+		var dex=iev.clientX-box1.offsetLeft;
+		var dey=iev.clientY-box1.offsetTop;
+		document.onmousemove=function(ev){
+			var iev=ev||event;
+			var l=iev.clientX-dex;
+			var t=iev.clientY-dey;
+			if(l<0){
+				l=0;
+			}else if(l>window.innerWidth-box1.offsetWidth){
+				l=window.innerWidth-box1.offsetWidth;
+			};
+			if(t<0){
+				t=0;
+			}else if(t>window.innerHeight-box1.offsetHeight){
+				t=window.innerHeight-box1.offsetHeight;
+			};
+			box1.style.left=l+'px';
+			box1.style.top=t+'px';
+			if(checkKiss(box1,box2)){
+				box2.style.background='red';
+			}else{
+				box2.style.background='green';
+			}
+		};
+		document.onmouseup=function(){
+			document.onmousemove=null;
+			document.onmouseup=null;
+		}
+	}
+</script>
+</html>

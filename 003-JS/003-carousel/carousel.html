@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轮播图</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.container{
+			position: relative;
+			width: 800px;
+			height: 400px;
+			margin: 100px auto;
+		}
+		.container .img-box li{
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			list-style: none;
+		}
+		.container .img-box img{
+			width: 100%;
+			height: 100%;
+		}
+		.container .left-btn,.container .right-btn{
+			position: absolute;
+			width: 40px;
+			height: 80px;
+			font-size: 24px;
+			font-weight: 500;
+			text-align: center;
+			line-height: 80px;
+			cursor: pointer;
+			background: #6f212e;
+			color: #fff;
+			top: 50%;
+			margin-top: -40px;
+			z-index: 100;
+		}
+		.container .left-btn{
+			left: 0;
+		}
+		.container .right-btn{
+			right: 0;
+		}
+		.container .circle-btn li{
+			float: left;
+			list-style: none;
+		}
+		.container .circle-btn{
+			position: absolute;
+			right: 10px;
+			bottom: 10px;
+			z-index: 100;
+		}
+		.container .circle-btn li{
+			width: 10px;
+			height: 10px;
+			background: pink;
+			margin-left: 10px;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		.container .circle-btn li.active{
+			background: green;
+		}
+	</style>
+</head>
+<body>
+	<div class="container" id="curousel">
+			<ul class="img-box">
+				<li><img src="images/1.jpg" alt=""></li>
+				<li><img src="images/2.jpg" alt=""></li>
+				<li><img src="images/3.jpg" alt=""></li>
+				<li><img src="images/4.jpg" alt=""></li>
+				<li><img src="images/5.jpg" alt=""></li>
+			</ul>
+			<div class="left-btn" id="left-btn">&lt;</div>
+			<div class="right-btn" id="right-btn">&gt;</div>
+			<div class="circle-btn">
+				<ul>
+					<li class="active"></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+	</div>
+</body>
+<script src="tools.js"></script>
+<script>
+	var oliImg=document.querySelectorAll('.img-box li');
+	var oliBtn=document.querySelectorAll('.circle-btn li');
+	var rbtn=document.getElementById('right-btn');
+	var lbtn=document.getElementById('left-btn');
+	var curousel=document.getElementById('curousel');
+	var timer=null;
+	var now=0;
+		rbtn.onclick=function(){
+			now++;
+			if(now>=oliImg.length){
+				now=0;
+			}
+			tab();
+		}
+		lbtn.onclick=function(){
+			now--;
+			if(now<0){
+				now=oliImg.length-1;
+			}
+			tab();
+		}
+		function tab(){
+			for(var i=0;i<oliImg.length;i++){
+				oliImg[i].style.zIndex=0;
+				oliImg[i].style.opacity=0;
+				oliBtn[i].className='';
+			}
+			oliImg[now].style.zIndex=30;
+			animation(oliImg[now],{opacity:100},false);
+			oliBtn[now].className='active';
+		}
+		for(var i=0;i<oliBtn.length;i++){
+			oliBtn[i].index=i;
+			oliBtn[i].onclick=function(){
+				now=this.index;
+				tab();
+			}
+		}
+		timer=setInterval(function(){
+			now++;
+			if(now>=oliImg.length){
+				now=0;
+			}
+			tab();
+		},5000)
+		curousel.onmouseover=function(){
+			clearInterval(timer);
+		}
+		curousel.onmouseout=function(){
+			timer=setInterval(function(){
+				now++;
+				if(now>=oliImg.length){
+					now=0;
+				}
+				tab();
+			},5000)
+		}
+</script>
+</html>

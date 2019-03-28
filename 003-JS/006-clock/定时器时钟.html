@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>定时器时钟</title>
+	<style>
+	body{
+		background: black
+	}
+		img{
+			width: 20px;
+			height: 30px;
+			vertical-align: middle;
+		}
+		span{
+			color: #fff;
+			margin-left: 5px;
+			font-size: 20px;
+		}
+	</style>
+</head>
+<body>
+	<img src="" alt="">
+	<img src="" alt=""><span>:</span>
+	<img src="" alt="">
+	<img src="" alt=""><span>:</span>
+	<img src="" alt="">
+	<img src="" alt="">
+</body>
+<script>
+	window.onload=function(){
+		var now=new Date();
+		var h=now.getHours();
+		var m=now.getMinutes();
+		var s=now.getSeconds();
+		console.log(typeof h);
+		var h1=parseInt(h/10);
+		var h2=h%10;
+		var m1=parseInt(m/10);
+		var m2=m%10;
+		var s1=parseInt(s/10);
+		var s2=s%10;
+		img[0].src='img/'+h1+'.jpg';
+		img[1].src='img/'+h2+'.jpg';
+		img[2].src='img/'+m1+'.jpg';
+		img[3].src='img/'+m2+'.jpg';
+		img[4].src='img/'+s1+'.jpg';
+		img[5].src='img/'+s2+'.jpg';
+	}
+	var img=document.querySelectorAll('img');
+		setInterval(function(){
+		var now=new Date();
+		var h=now.getHours();
+		var m=now.getMinutes();
+		var s=now.getSeconds();
+		console.log(typeof h);
+		var h1=parseInt(h/10);
+		var h2=h%10;
+		var m1=parseInt(m/10);
+		var m2=m%10;
+		var s1=parseInt(s/10);
+		var s2=s%10;
+		img[0].src='img/'+h1+'.jpg';
+		img[1].src='img/'+h2+'.jpg';
+		img[2].src='img/'+m1+'.jpg';
+		img[3].src='img/'+m2+'.jpg';
+		img[4].src='img/'+s1+'.jpg';
+		img[5].src='img/'+s2+'.jpg';
+	},1000)
+</script>
+</html>

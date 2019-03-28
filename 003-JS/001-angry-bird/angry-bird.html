@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>angry-bird.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			overflow: hidden;
+		}
+		.bird{
+			position: absolute;
+			width: 30px;
+			height: 30px;
+			left: 100px;
+			top: 300px;
+			background: pink;
+		}
+		.topLine{
+			position: absolute;
+			width: 30px;
+			background: green;
+			float: left;
+			top: 0;
+			left: 100%;
+		}
+		.bottomLine{
+			position: absolute;
+			width: 30px;
+			background: green;
+			float: left;
+			bottom: 0;
+			left: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div class="bird"></div>
+</body>
+<script>
+
+	//获取随机数
+	function getRandom(min,max){
+		//Math.random()生成的随机数字为0到1;
+		return Math.round(min+Math.random()*(max-min));
+	};
+
+	//检测两个物体碰撞的函数
+	function checkKiss(obj1,obj2){
+		if((obj1.offsetLeft+obj1.offsetWidth)>obj2.offsetLeft
+				&&(obj1.offsetTop+obj1.offsetHeight)>obj2.offsetTop
+				&&(obj2.offsetLeft+obj2.offsetWidth)>obj1.offsetLeft
+				&&(obj2.offsetTop+obj2.offsetHeight)>obj1.offsetTop){
+				return true;
+			}else{
+				return false;
+			}
+	};
+
+	//增加柱子
+	var addLineTimer=null;
+	addLine();
+	function addLine(){
+		addLineTimer=setInterval(function(){
+			var topLine=document.createElement('div');
+			topLine.className='topLine';
+			document.body.appendChild(topLine);
+			topLine.data=100;
+			topLine.style.height=getRandom(240,340)+'px';
+			var bottomLine=document.createElement('div');
+			bottomLine.className='bottomLine';
+			document.body.appendChild(bottomLine);
+			bottomLine.style.height=window.innerHeight-getRandom(240,340)-160+'px';
+		},1000);
+	};
+	/*clearInterval(addLineTimer);*/
+	/*addLineTimer=setInterval(function(){
+		addLine();
+	},1000);*/
+
+	//移动柱子
+	var moveLineTimer=null;
+	moveLine();
+	function moveLine(){
+		moveLineTimer=setInterval(function(){
+			var topLine=document.querySelectorAll('.topLine');
+			var bottomLine=document.querySelectorAll('.bottomLine');
+			var bird=document.querySelector('.bird');
+			for(var i=0;i<topLine.length;i++){
+				if(checkKiss(topLine[i],bird)||checkKiss(bottomLine[i],bird)){
+					die();
+				};
+				if(topLine[i].data=='-10'){
+					document.body.removeChild(topLine[i]);
+					document.body.removeChild(bottomLine[i]);
+				};
+				topLine[i].style.left=topLine[i].data-1+'%';
+				bottomLine[i].style.left=topLine[i].data-1+'%';
+				topLine[i].data=topLine[i].data-1;
+			};
+		},100);	
+	};
+	/*clearInterval(moveLineTimer);*/
+	/*moveLineTimer=setInterval(function(){
+		moveLine();
+	},100);*/
+
+	//小鸟的移动
+	var moveBirdTimer=null;
+	var isDie=false;
+	moveBird();           //注意：先定义变量，再调用函数
+	function moveBird(){
+		var bird=document.querySelector('.bird');
+		var speed=0;
+		clearInterval(moveBirdTimer);
+		moveBirdTimer=setInterval(function(){
+			speed+=0.4;
+			var t=bird.offsetTop+speed;
+			if(t<0){
+				die();
+				t=0;
+			}else if(t>window.innerHeight-bird.offsetHeight){
+				die();
+				t=window.innerHeight-bird.offsetHeight;
+			};
+			bird.style.top=t+'px';
+		},100);
+		document.onkeydown=function(ev){
+			var iev=ev||event;
+			if(isDie){
+				return false;
+			};
+			if(iev.keyCode==13){
+				speed+=-2.5;
+				console.log(speed);
+			}
+		};
+	}
+	//处理碰撞和死亡
+	function die(){
+		clearInterval(addLineTimer);
+		clearInterval(moveLineTimer);
+		clearInterval(moveBirdTimer);
+		isDie=true;
+	};
+</script>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>mirror</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.phone{
+			position: relative;
+			left: 100px;	
+			top: 50px;
+		}
+		.clearfix:after{
+			clear: both;
+			content: "";
+			display: block;
+			visibility: hidden;
+			height: 0;
+		}
+		.clearfix{
+			*zoom:1;
+		}
+		.left-box{
+			position: absolute;
+			float: left;
+			width: 450px;
+			height: 450px;
+			border: 1px solid gray;
+			cursor: move;
+		}
+		.movBox{
+			position: absolute;
+			width: 302px;
+			height: 302px;
+			background: #FEDE4F;
+			left: 0;
+			top: 0;
+			opacity: 0.5;
+			display: none;
+		}
+		.left-box img,.bottom-box img{
+			width: 100%;
+			height: 100%;
+		}
+		.right-box{
+			position: absolute;
+			float: left;
+			width: 508px;
+			height: 518px;
+			border: 1px solid gray;
+			left: 450px;
+			top: 0;
+			overflow: hidden;
+			display: none;
+		}
+		.right-box img{
+			position: absolute;
+		}
+		.bottom-box{
+			position: absolute;
+			left: 100px;
+			top: 464px;
+		}
+		.bottom-box ul li{
+			float: left;
+			width: 58px;
+			height: 58px;
+			margin-left: 20px;
+			list-style: none;
+		}
+		.bottom-box ul li.active{
+			border: 1px solid red;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+<body>
+	<div class="phone clearfix">
+		<div class="left-box">
+			<img src="images/4.jpg" alt="">
+			<div class="movBox"></div>
+		</div>
+		<div class="right-box">
+			<img src="images/1.jpg" alt="">
+		</div>
+		<div class="bottom-box">
+			<ul>
+				<li class="active">
+					<img src="images/7.jpg" alt="">
+				</li>
+				<li>
+					<img src="images/8.jpg" alt="">
+				</li>
+				<li>
+					<img src="images/9.jpg" alt="">
+				</li>
+			</ul>
+		</div>
+	</div>	
+</body>
+<script>
+	var li=document.querySelectorAll('.bottom-box ul li');
+	var leftBox=document.querySelector('.left-box');
+	var rightBox=document.querySelector('.right-box');
+	var leftImg=document.querySelector('.left-box img');
+	var rightImg=document.querySelector('.right-box img');
+	var movBox=document.querySelector('.movBox');
+	var phone=document.querySelector('.phone');
+	var scall=0;
+	for(var i=0;i<li.length;i++){
+		li[i].index=i;
+		li[i].onmouseover=function(){
+			for(var j=0;j<li.length;j++){
+				li[j].className='';
+			}
+			li[this.index].className='active';
+			leftImg.src='images/'+(this.index+4)+'.jpg';  //中间变量和数字相加，需要加上括号。
+			rightImg.src='images/'+(this.index+1)+'.jpg';
+		}
+	};
+	leftBox.onmouseenter=function(){
+		movBox.style.display='block';
+		rightBox.style.display='block';
+			leftBox.onmousemove=function(ev){
+			var ive=ev||event;
+			var l=ive.clientX-phone.offsetLeft-movBox.offsetWidth*0.5;
+			var t=ive.clientY-phone.offsetTop-movBox.offsetHeight*0.5;
+			if(l<0){
+				l=0;
+			}else if(l>leftBox.offsetWidth-movBox.offsetWidth){
+				l=leftBox.offsetWidth-movBox.offsetWidth;
+			};
+			if(t<0){
+				t=0;
+			}else if(t>leftBox.offsetHeight-movBox.offsetHeight){
+				t=leftBox.offsetHeight-movBox.offsetHeight;
+			}
+			movBox.style.left=l+'px';
+			movBox.style.top=t+'px';   
+			//图片移动的距离等于((遮罩层已经拖动的距离/遮罩层总的可以拖动的距离)*（图片的高-右边盒子的高度)
+			scallLeft=movBox.offsetLeft/(leftBox.offsetWidth-movBox.offsetWidth);
+			scallTop=movBox.offsetTop/(leftBox.offsetHeight-movBox.offsetHeight);
+			rightImg.style.left=-scallLeft*(rightImg.offsetWidth-rightBox.offsetWidth)+'px';
+			rightImg.style.top=-scallTop*(rightImg.offsetHeight-rightBox.offsetHeight)+'px';
+		}
+	}
+	leftBox.onmouseleave=function(){
+		movBox.style.display='none';
+		rightBox.style.display='none';
+	}
+</script>
+</html>

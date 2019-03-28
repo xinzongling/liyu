@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>calender</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.clearfix:after{
+			clear: both;
+			content: "";
+			display: block;
+			visibility: hidden;
+			height: 0;
+		}
+		.clearfix{
+			*zoom:1;
+		}
+		.box{
+			width: 280px;
+			height: 440px;
+			background: gray;
+			margin: 100px auto;
+		}
+		.box ul li{
+			float: left;
+			list-style: none;
+			width: 80px;
+			height: 80px;
+			background: black;
+			margin-left: 10px;
+			margin-top: 10px;
+			color: #fff;
+			font-size: 20px;
+			text-align: center;
+			line-height: 80px;
+		}
+		p{
+			margin-left: 10px;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<ul class="clearfix">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li>10</li>
+			<li>11</li>
+			<li>12</li>
+		</ul>
+		<p style="font-weight: 800"><span>1</span>月</p>
+		<p class="active">去旅游</p>
+	</div>
+</body>
+<script>
+	var li=document.querySelectorAll('.box ul li');
+	var span=document.querySelector('.box p span');
+	var p2=document.querySelector('.box p.active');
+	var li=document.querySelectorAll('.box ul li');
+	var arr=['去踏青','去旅游','去爬山','学习','吃饭','写代码','考驾照','考驾照','去游泳','跑步','看电影','看电视']
+	for(var i=0;i<li.length;i++){
+		li[i].index=i;
+		li[i].onmouseover=function(){
+			for(var j=0;j<li.length;j++){
+				li[j].style.background='black';
+				li[j].style.color='#fff';
+			}
+			li[this.index].style.background='#fff';
+			li[this.index].style.color='black';
+			span.innerHTML=this.index+1;
+			p2.innerHTML=arr[this.index];
+		}
+	}
+</script>
+</html>

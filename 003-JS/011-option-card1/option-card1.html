@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>面向对象实现选项卡</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		li{
+			list-style: none;
+		}
+		#btn{
+			height: 30px;
+		}
+		#btn li{
+			float: left;
+			width: 50px;
+			height: 20px;
+			background: pink;
+			margin-left: 10px;
+			cursor: pointer;
+			text-align: center;
+			line-height: 20px;
+		}
+		#content li{
+			width: 200px;
+			height: 400px;
+			border: 1px solid black;
+			display: none;
+		}
+		#btn li.active{
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<ul id="btn">
+		<li class="active">btn1</li>
+		<li>btn2</li>
+		<li>btn3</li>
+		<li>btn4</li>
+	</ul>
+	<ul id="content">
+		<li>content1</li>
+		<li>content2</li>
+		<li>content3</li>
+		<li>content4</li>
+	</ul>
+</body>
+<script>
+		function tab(){
+			this.btn=document.querySelectorAll('#btn li');
+			this.content=document.querySelectorAll('#content li');
+			/*var _self=this;
+			for(var i=0;i<this.btn.length;i++){
+				this.btn[i].index=i;
+				this.btn[i].onclick=function(){
+					_self.fnClick(this);
+				}	
+			}*/
+			for(var i=0;i<this.btn.length;i++){
+				this.btn[i].index=i;
+				this.btn[i].onclick=this.fnClick.bind(this,this.btn[i])
+			}
+		}
+		tab.prototype.fnClick=function(oBtn){
+			for(var j=0;j<this.btn.length;j++){
+				this.btn[j].className='';
+				this.content[j].style.display='none';
+			}
+			this.btn[oBtn.index].className='active';
+			this.content[oBtn.index].style.display='block';
+			console.log(this);
+		}
+
+		new tab();
+	
+</script>	
+</html>

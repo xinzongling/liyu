@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>scroll-bar1.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			height: 3000px;
+		}
+		.f1{
+			width: 300px;
+			height: 30px;
+			background: gray;
+		}
+		.s1{
+			width: 30px;
+			height: 30px;
+			background: pink;
+			position: absolute;
+			cursor: pointer;
+		}
+		.box{
+			width: 300px;
+			height: 500px;
+			border: 1px solid black;
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<div class="f1">
+		<div class="s1"></div>
+	</div>
+	<div class="box">
+		<div class="box1">
+			JavaScript一种直译式脚本语言，是一种动态类型、弱类型、基于原型的语言，内置支持类型。它的解释器被称为JavaScript引擎，为浏览器的一部分，广泛用于客户端的脚本语言，最早是在HTML（标准通用标记语言下的一个应用）网页上使用，用来给HTML网页增加动态功能。<br>
+			JavaScript一种直译式脚本语言，是一种动态类型、弱类型、基于原型的语言，内置支持类型。它的解释器被称为JavaScript引擎，为浏览器的一部分，广泛用于客户端的脚本语言，最早是在HTML（标准通用标记语言下的一个应用）网页上使用，用来给HTML网页增加动态功能。 
+			<br>
+			在1995年时，由Netscape公司的Brendan Eich，在网景导航者浏览器上首次设计实现而成。因为Netscape与Sun合作，Netscape管理层希望它外观看起来像Java，因此取名为JavaScript。但实际上它的语法风格与Self及Scheme较为接近。
+			<br>
+			为了取得技术优势，微软推出了JScript，CEnvi推出ScriptEase，与JavaScript同样可在浏览器上运行。为了统一规格，因为JavaScript兼容于ECMA标准，因此也称为ECMAScript。
+			<br>
+			Netscape在最初将其脚本语言命名为LiveScript，后来Netscape在与Sun合作之后将其改名为JavaScript。JavaScript最初受Java启发而开始设计的，目的之一就是“看上去像Java”，因此语法上有类似之处，一些名称和命名规范也借自Java。但JavaScript的主要设计原则源自Self和Scheme。JavaScript与Java名称上的近似，是当时网景为了营销考虑与太阳微系统达成协议的结果。为了取得技术优势，微软推出了JScript来迎战JavaScript的脚本语言。为了互用性，Ecma国际（前身为欧洲计算机制造商协会）创建了ECMA-262标准（ECMAScript）。现在两者都属于ECMAScript的实现。尽管JavaScript作为给非程序人员的脚本语言，而非作为给程序人员的脚本语言来推广和宣传，但是JavaScript具有非常丰富的特性。
+			<br>
+			发展初期，JavaScript的标准并未确定，同期有网景的JavaScript，微软的JScript和CEnvi的ScriptEase三足鼎立。1997年，在ECMA（欧洲计算机制造商协会）的协调下，由Netscape、Sun、微软、Borland组成的工作组确定统一标准：ECMA-262。
+		</div>
+	</div>
+</body>
+<script>
+	var f1=document.querySelector('.f1');
+	var s1=document.querySelector('.s1');
+	var box=document.querySelector('.box');
+	var box1=document.querySelector('.box1');
+
+	s1.onmousedown=function(ev){
+		var iev=ev||event;
+		var l=0;
+		var dex=iev.clientX-s1.offsetLeft;
+		var dey=iev.clientY-s1.offsetTop;
+		document.onmousemove=function(ev){
+			var iev=ev||event;
+			l=iev.clientX-dex;
+			handleMove();
+		};
+		document.onmousewheel=function(ev){
+			var iev=ev||event;
+			//console.log(iev.wheelDelta);
+			if(iev.wheelDelta>0){
+				l+=10;
+				handleMove();
+				return false;
+			}else{
+				l-=10;
+				handleMove();
+				return false;
+			}
+		};
+		function handleMove(){
+			if(l<0){
+					l=0;
+				}else if(l>f1.offsetWidth-s1.offsetWidth){
+					l=f1.offsetWidth-s1.offsetWidth;
+				}
+				s1.style.left=l+'px';
+				var scall=l/(f1.offsetWidth-s1.offsetWidth);
+				box1.style.marginTop=-scall*(box1.offsetHeight-box.offsetHeight)+'px';
+		}
+		document.onmouseup=function(){
+			document.onmousemove=null;
+			document.onmouseup=null;
+		}
+	}
+
+</script>
+</html>
