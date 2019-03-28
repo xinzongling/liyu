@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+</body>
+<script>
+	var cxt=document.getElementById('canvas');
+        cxt.width=500;//width和height是指画布大大小,不用带单位
+        cxt.height=500;
+	var cxt=cxt.getContext('2d');//1,获取元素。2,设置宽高。3,设置环境
+
+    cxt.beginPath();
+    cxt.save();//存储当前画布坐标系状态
+    cxt.translate(300,300); 
+    cxt.arc(0,0,50,0,Math.PI*2,false);
+    cxt.strokeStyle='#f0f';//描边样式和描边方法同时存在
+    cxt.stroke();
+
+    cxt.beginPath();  //相当于一个封闭空间
+    cxt.restore() 
+    cxt.moveTo(0,0);
+    cxt.lineTo(100,100);
+    cxt.strokeStyle='#ff0';
+    cxt.stroke();
+    cxt.save();       
+
+    cxt.beginPath();
+    
+    cxt.textAlign='center'; 
+    cxt.textBaseline='middle';
+    cxt.font = "14px Tahoma";
+    cxt.translate(300,300);
+
+    cxt.rotate(Math.PI/6);
+    //cxt.fillText(12,0,0);
+
+    cxt.clearRect(-500, -500, 2000, 2000);
+
+    cxt.fillText(16,0,0);
+
+
+    cxt.beginPath();
+     cxt.translate(400,400);
+      cxt.fillText(18,0,0);
+</script>
+</html>

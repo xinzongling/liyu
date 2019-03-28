@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>渐变</title>
+</head>
+<body>
+	<canvas></canvas>
+	<canvas></canvas>
+</body>
+<script>
+	//线性渐变
+	var canvas=document.getElementsByTagName('canvas')[0];
+	canvas.width=600;
+	canvas.height=600;
+	var content=canvas.getContext('2d');
+    var speed=1;
+    var now=0;
+    var time=0;
+    content.translate(250,250);  //坐标系的平移是相对于上一次的坐标系
+
+	content.beginPath();
+	//1,想要实现渐变，首先要创建一个关于渐变的对象
+	var linearGradient=content.createLinearGradient(0,0,200,100);
+	//2,为起始点和终止点添加颜色
+	linearGradient.addColorStop(0.2,'rgb(255,0,0)');
+	linearGradient.addColorStop(0.5,'rgb(0,255,0)');
+	linearGradient.addColorStop(1,'rgb(201,166,25)');
+	content.fillStyle=linearGradient;
+	content.fillRect(0,0,200,100);
+	content.fill();
+  
+
+
+  //径向渐变
+	var canvas=document.getElementsByTagName('canvas')[1];
+	canvas.width=600;
+	canvas.height=600;
+	var content=canvas.getContext('2d');
+    var speed=1;
+    var now=0;
+    var time=0;
+    content.translate(250,250);  //坐标系的平移是相对于上一次的坐标系
+
+	content.beginPath();
+	//1,想要实现渐变，首先要创建一个关于渐变的对象
+	/*
+	var radialGradient=content.createRadialGradient(起始圆心x,起始圆心y,起始半径,终止圆心x,终止圆心y,终止半径);*/
+	var radialGradient=content.createRadialGradient(0,0,0,0,0,200);
+	//2,为起始点和终止点添加颜色
+	radialGradient.addColorStop(0.01,'rgb(255,123,67)');
+	radialGradient.addColorStop(0.02,'rgb(255,160,90)');
+	radialGradient.addColorStop(0.02,'rgb(255,110,0)');
+	radialGradient.addColorStop(0.2,'rgb(255,69,110)');
+	radialGradient.addColorStop(0.5,'rgb(0,255,0)');
+	radialGradient.addColorStop(1,'rgb(201,166,25)');
+
+
+	content.fillStyle=radialGradient;
+	//content.fillStyle='rgb(255,0,0)';
+	content.arc(0,0,200,0,Math.PI*2,false);
+	content.fill();
+
+
+</script>
+</html>

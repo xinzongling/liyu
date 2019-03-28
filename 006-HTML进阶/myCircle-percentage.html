@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>myCircle-precentage.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			background: #000;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<canvas></canvas>
+</body>
+<script>
+	var canvas=document.getElementsByTagName('canvas')[0];
+	canvas.width=500;
+	canvas.height=500;
+	var content=canvas.getContext('2d');
+    var speed=0.6;
+    var now=0;
+
+
+    content.translate(250,250);  //坐标系的平移是相对于上一次的坐标系
+    function drawGrayCircle(){
+    	//绘制灰色的圆
+		content.beginPath();
+		content.strokeStyle='gray';
+		content.lineWidth = 4;
+		content.arc(0,0,200,0,Math.PI*2,false);
+		content.stroke();
+    }
+
+	function drawWhiteCircle(n){
+		//绘制白色的圆
+		content.beginPath();
+		content.strokeStyle='#fff';
+		content.lineWidth = 10;
+		content.arc(0,0,200,-Math.PI/2,n*2*Math.PI/100-Math.PI/2,false);
+		content.stroke();
+	}
+
+	function drawText(n){
+		//填充文字
+		content.beginPath();
+				content.lineWidth = 15;
+		content.strokeStyle='#f0f';
+		content.fillStyle = '#f0f'; //颜色只能用#+英文
+		content.font = "24px Tahoma";
+		content.textAlign='center'; 
+		content.textBaseline='middle';
+		content.fillText(n+'%',-6,0);
+		content.fill();
+		content.stroke();	
+	}
+	drawGrayCircle();
+	setInterval(function(){
+		now+=speed;
+		if(now>100){
+			drawWhiteCircle(100);
+			now=0;
+			content.clearRect(-500, -500, 2000, 2000);//不会清除坐标系
+			drawGrayCircle();
+		};
+		drawWhiteCircle(now);
+		content.clearRect(-60, -60, 80, 80);
+		drawText(Math.ceil(now));
+	},100);
+
+
+
+</script>
+</html>

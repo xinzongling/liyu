@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>myDirect-precentage.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			background: #000;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<canvas></canvas>
+</body>
+<script>
+	var canvas=document.getElementsByTagName('canvas')[0];
+	canvas.width=800;
+	canvas.height=800;
+	var content=canvas.getContext('2d');
+	var speed=10;
+	var now=0;
+
+	content.translate(100,100);
+
+	function drawContainer(){		
+		//容器
+		content.beginPath();
+		content.fillStyle = 'rgba(0,255,0,0.5)';
+		content.strokeStyle = "rgba(0,255,0,0.5)";
+		content.strokeRect(0,0,600,20);
+		content.fillRect(0,0,600,20);
+		content.stroke();
+
+		//容器左侧
+		content.beginPath();
+		content.lineWidth = 2;
+		content.strokeStyle = "rgba(0,255,0,0.5)";
+		content.fillStyle = 'rgba(0,255,0,0.5)'
+		content.moveTo(0, 0);
+		content.quadraticCurveTo(-12, 10, 0, 20);
+		content.stroke();
+		content.fill();
+
+		//容器右侧
+		content.beginPath();
+		content.lineWidth = 2;
+		content.strokeStyle = "rgba(0,255,0,0.5)";
+		content.fillStyle = 'rgba(0,255,0,0.5)'
+		content.moveTo(600, 0);
+		content.quadraticCurveTo(612, 10, 600, 20);
+		content.stroke();
+		content.fill();
+	}
+	//绘制进度条
+	function drawPinkPercentage(n,callback){
+		content.beginPath();
+		content.fillStyle = '#f15b6c';
+		content.strokeStyle = "#f15b6c";
+		content.strokeRect(0,0,n,20);
+		content.fillRect(0,0,n,20);
+		content.stroke();
+		//进度条左侧
+		content.beginPath();
+		content.lineWidth = 2;
+		content.strokeStyle = "#f15b6c";
+		content.fillStyle = '#f15b6c';
+		content.moveTo(0, 0);
+		content.quadraticCurveTo(-12, 10, 0, 20);
+		content.stroke();
+		content.fill();
+		//进度条右侧
+		callback&&callback();
+	};
+
+	//填充文字
+	function drawText(context,n){
+		content.beginPath();
+		content.strokeStyle='#000';
+		content.fillStyle = '#000'; //颜色只能用#+英文
+		content.font = "14px Tahoma";
+		content.textAlign='center'; 
+		content.textBaseline='middle';
+		context&&n?content.fillText(context+n+'%',120,10):content.fillText(context,120,10);
+		content.fill();
+		content.stroke();	
+	}
+	setInterval(function(){
+		now+=speed;
+		function show(now){
+			//进度条右侧
+			console.log(now)
+			return function(){
+				content.beginPath();
+				content.lineWidth = 2;
+				content.strokeStyle = "#f15b6c";
+				content.fillStyle = '#f15b6c';
+				content.moveTo(now, 0);
+				content.quadraticCurveTo(now+12, 10, now, 20);
+				content.stroke();
+				content.fill();	
+			}
+		};		
+		if(now>600){
+			now=600;
+			drawPinkPercentage(600,show(now));
+			drawText('加载已经完成');
+			return;
+		};
+		drawPinkPercentage(now,show(now));
+		content.clearRect(0, -4, 600, 28);
+		drawContainer();
+		drawPinkPercentage(now,show(now));
+		drawText('正在加载.....',Math.ceil(100*now/600));
+	},100);
+
+</script>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>myClock.html</title>
+</head>
+<body>
+	<canvas></canvas>
+</body>
+<script>
+	clock();
+	setInterval(clock,1000);
+
+	function clock(){
+
+		var oCanvas=document.getElementsByTagName('canvas')[0];
+		oCanvas.width=500;
+		oCanvas.height=500;
+		var content=oCanvas.getContext('2d');
+		content.beginPath();
+		content.strokeStyle="#ff0";
+		for(var i=0;i<20;i++){        
+			content.moveTo(25*i,0);
+			content.lineTo(25*i,500);
+			content.stroke();
+		};
+		for(var j=0;j<20;j++){
+			content.moveTo(0,25*j);
+			content.lineTo(500,25*j);
+			content.stroke();
+		};
+		//画圆
+		content.beginPath();
+		content.translate(250,250);
+		content.strokeStyle="black";
+		content.lineWidth=20;
+		content.arc(0,0,200,0,2*Math.PI,false);
+		content.stroke();
+
+		//填写数字(1,2,...,12);
+		content.beginPath();
+		content.textAlign='center'; 
+		content.textBaseline='middle';
+		content.rotate(-2*Math.PI/6);
+		for(var i=1;i<=12;i++){	
+			content.fillText(i,180,0);	
+			content.rotate(Math.PI/6);
+		}
+		
+		//填充圆四周的小点点
+		content.beginPath();
+		content.rotate(-2*Math.PI/60);
+		for(var i=0;i<60;i++){
+			content.rotate(2*Math.PI/60);
+			if(i%5!==0){
+				content.strokeStyle="gray";
+				content.arc(186,0,(2*Math.PI/60),0,2*Math.PI,false);
+				content.stroke();	
+			}
+		}
+
+
+		//获取系统的时间
+		var now=new Date();
+		var hour=now.getHours()>12?now.getHours()-12:now.getHours();
+		var min=now.getMinutes();
+		var sec=now.getSeconds();
+		//12*60*60=43200;一天
+
+		content.beginPath();
+		content.rotate(-4*2*Math.PI/60);
+
+		content.save();
+		content.beginPath();
+		content.restore();
+
+		//画时针
+		content.beginPath();
+		content.restore();
+		content.save();
+		content.rotate(2*Math.PI*(hour*60*60+min*60+sec)/43200); //坐标系的旋转一定要靠前
+		content.strokeStyle="black";
+		content.lineWidth=10;
+		content.moveTo(-20,0);
+		content.lineTo(80,0);
+		content.stroke();
+
+		//画分针
+		content.beginPath();
+		content.restore();
+		content.save();
+		content.rotate(2*Math.PI*min/60);
+		content.strokeStyle="black";
+		content.lineWidth=8;
+		content.moveTo(-20,0);
+		content.lineTo(160,0);
+		content.stroke();
+
+		//画秒针
+		content.beginPath();
+		content.restore();
+		content.save();
+		content.rotate(2*Math.PI*sec/60);
+		content.strokeStyle="red";
+		content.lineWidth=4;
+		content.moveTo(-20,0);
+		content.lineTo(170,0);
+		content.stroke();
+
+		//画圆中心点
+		content.beginPath();
+		content.strokeStyle="white";
+		content.lineWidth=1;
+		content.fillStyle = 'white';
+		content.arc(0,0,6,0,2*Math.PI,false);
+		content.fill();
+		content.stroke();
+
+}
+</script>
+</html>

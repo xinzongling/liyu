@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>下雪效果</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		canvas{
+			background: #000;
+			margin-left: 400px;
+			margin-top: 100px;
+		}
+	</style>
+</head>
+<body>
+	<canvas></canvas>
+</body>
+<script>
+	var canvas=document.getElementsByTagName('canvas')[0];
+	canvas.width=1000;
+	canvas.height=600;
+	var content=canvas.getContext('2d');
+
+	//生成随机数
+	function getRandom(min,max){
+		return Math.round(min+(max-min)*Math.random());
+	}
+
+	//生成小球的一个对象
+	function Ball(x,y){
+		this.x=x;
+		this.y=y;
+		this.color='#fff';
+
+		this.r=getRandom(1,4);//生成雪花的大小
+
+		//雪花运动的方向
+		this.dX=5;
+		this.dY=8;  
+	}
+	Ball.prototype={
+		constructor:Ball,
+		render:function(){
+			//绘制小球
+			content.beginPath();
+			content.fillStyle=this.color;
+			content.arc(this.x,this.y,this.r,0,2*Math.PI,false);
+			content.fill();
+		},
+		update:function(){
+			this.x+=this.dX;
+			this.y+=this.dY;
+		}
+	};
+
+	var ballArr=[]; 
+
+	setInterval(function(){
+		for(var i=0;i<50;i++){
+			var ball=new Ball(getRandom(-400,1000),getRandom(-100,0));
+			ball.render();
+			ballArr.push(ball);
+		};
+	},800);
+	setInterval(function(){
+		content.clearRect(0,0,canvas.width,canvas.height);
+		for(var i=0;i<ballArr.length;i++){
+			ballArr[i].render();
+			ballArr[i].update();
+		}
+	},50);
+
+</script>
+</html>

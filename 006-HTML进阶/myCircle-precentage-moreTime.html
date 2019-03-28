@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>myCircle-precentage-moreTime.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			background: #000;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<canvas></canvas>
+	<canvas></canvas>
+	<canvas></canvas>
+</body>
+<script>
+	//时针
+	var canvas0=document.getElementsByTagName('canvas')[0];
+	canvas0.width=300;
+	canvas0.height=300;
+	var content0=canvas0.getContext('2d');
+
+	content0.beginPath();
+    content0.translate(150,150);  //坐标系的平移是相对于上一次的坐标系
+
+    function drawHourGrayCircle(){
+    	//绘制灰色的圆
+		content0.beginPath();
+		content0.strokeStyle='gray';
+		content0.lineWidth = 4;
+		content0.arc(0,0,100,0,Math.PI*2,false);
+		content0.stroke();
+    }
+	function drawHourWhiteCircle(n){
+		//绘制白色的圆
+		content0.beginPath();
+		content0.strokeStyle='#bed742';
+		content0.lineWidth = 10;
+		content0.arc(0,0,100,-Math.PI/2,n*2*Math.PI/12-Math.PI/2,false);
+		content0.stroke();
+	}
+	function drawHourText(n){
+		//填充文字
+		content0.beginPath();
+		content0.lineWidth = 15;
+		content0.strokeStyle='#f0f';
+		content0.fillStyle = '#f0f'; //颜色只能用#+英文
+		content0.font = "24px Tahoma";
+		content0.textAlign='center'; 
+		content0.textBaseline='middle';
+		content0.fillText(n,-10,0);
+		content0.fillText('Hour',-14,26);
+		content0.fill();
+		content0.stroke();	
+	}
+	drawHourGrayCircle();
+
+	setInterval(function(){
+		//获取系统的当前时间
+    	var now=new Date();
+		var hour=now.getHours()>12?now.getHours()-12:now.getHours();
+		var min=now.getMinutes();
+		var sec=now.getSeconds();
+		if(hour==59){
+			content0.clearRect(-1500, -1500, 2500, 2500);//不会清除坐标系
+			drawHourGrayCircle();
+			return;
+		};
+		drawHourWhiteCircle(hour);
+		content0.clearRect(-50, -50, 70, 70);
+		drawHourText(now.getHours());
+	},1000);
+
+	//分针
+	var canvas1=document.getElementsByTagName('canvas')[1];
+	canvas1.width=300;
+	canvas1.height=300;
+	var content1=canvas1.getContext('2d');
+	 //坐标系的平移是相对于上一次的坐标系
+    content1.beginPath();
+	content1.translate(150,150);
+    function drawMinGrayCircle(){
+    	//绘制灰色的圆
+		content1.beginPath();
+		content1.strokeStyle='gray';
+		content1.lineWidth = 4;
+		content1.arc(0,0,100,0,Math.PI*2,false);
+		content1.stroke();
+    }
+	function drawMinWhiteCircle(n){
+		//绘制白色的圆
+		content1.beginPath();
+		content1.strokeStyle='#6950a1';
+		content1.lineWidth = 10;
+		content1.arc(0,0,100,-Math.PI/2,n*2*Math.PI/60-Math.PI/2,false);
+		content1.stroke();
+	}
+	function drawMinText(n){
+		//填充文字
+		content1.beginPath();
+		content1.lineWidth = 15;
+		content1.strokeStyle='#f0f';
+		content1.fillStyle = '#f0f'; //颜色只能用#+英文
+		content1.font = "24px Tahoma";
+		content1.textAlign='center'; 
+		content1.textBaseline='middle';
+		content1.fillText(n,-10,0);
+		content1.fillText('Minute',-14,26);
+		content1.fill();
+		content1.stroke();	
+	}
+	drawMinGrayCircle();
+
+	setInterval(function(){
+		//获取系统的当前时间
+    	var now=new Date();
+		var hour=now.getHours()>12?now.getHours()-12:now.getHours();
+		var min=now.getMinutes();
+		var sec=now.getSeconds();
+		if(min==59){
+			content1.clearRect(-1500, -1500, 2500, 2500);//不会清除坐标系
+			drawMinGrayCircle();
+			return;
+		};
+		drawMinWhiteCircle(min);
+		content1.clearRect(-50, -50, 70, 70);
+		drawMinText(min);
+	},1000);
+
+	//秒针
+	var canvas2=document.getElementsByTagName('canvas')[2];
+	canvas2.width=300;
+	canvas2.height=300;
+	var content2=canvas2.getContext('2d');
+
+	content2.beginPath();
+    content2.translate(150,150);  //坐标系的平移是相对于上一次的坐标系
+
+    function drawSecondGrayCircle(){
+    	//绘制灰色的圆
+		content2.beginPath();
+		content2.strokeStyle='gray';
+		content2.lineWidth = 4;
+		content2.arc(0,0,100,0,Math.PI*2,false);
+		content2.stroke();
+    }
+	function drawSecondWhiteCircle(n){
+		//绘制白色的圆
+		content2.beginPath();
+		content2.strokeStyle='#009ad6';
+		content2.lineWidth = 10;
+		content2.arc(0,0,100,-Math.PI/2,n*2*Math.PI/60-Math.PI/2,false);
+		content2.stroke();
+	}
+	function drawSecondText(n){
+		//填充文字
+		content2.beginPath();
+		content2.lineWidth = 15;
+		content2.strokeStyle='#f0f';
+		content2.fillStyle = '#f0f'; //颜色只能用#+英文
+		content2.font = "24px Tahoma";
+		content2.textAlign='center'; 
+		content2.textBaseline='middle';
+		content2.fillText(n,-10,0);
+		content2.fillText('Second',-14,26);
+		content2.fill();
+		content2.stroke();	
+	}
+	drawSecondGrayCircle();
+	setInterval(function(){
+		//获取系统的当前时间
+    	var now=new Date();
+		var hour=now.getHours()>12?now.getHours()-12:now.getHours();
+		var min=now.getMinutes();
+		var sec=now.getSeconds();
+		if(sec==59){
+			content2.clearRect(-1500, -1500, 2500, 2500);//不会清除坐标系
+			drawSecondGrayCircle();
+			return;
+		};
+		drawSecondWhiteCircle(sec);
+		content2.clearRect(-50, -50, 70, 70);
+		drawSecondText(60-sec);
+	},1000);
+</script>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>myCircle-precentage.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			background: #000;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<canvas></canvas>
+</body>
+<script>
+	var canvas=document.getElementsByTagName('canvas')[0];
+	canvas.width=500;
+	canvas.height=500;
+	var content=canvas.getContext('2d');
+    var speed=1;
+    var now=0;
+    var time=0;
+    content.translate(250,250);  //坐标系的平移是相对于上一次的坐标系
+    function drawGrayCircle(){  //绘制灰色的圆
+		content.beginPath();
+		content.strokeStyle='gray';
+		content.lineWidth = 4;
+		content.arc(0,0,200,0,Math.PI*2,false);
+		content.stroke();
+    }
+	function drawWhiteCircle(n){   //绘制白色的圆
+		content.beginPath();
+		content.strokeStyle='#fff';
+		content.lineWidth = 10;
+		content.arc(0,0,200,-Math.PI/2,n*2*Math.PI/60-Math.PI/2,false);
+		content.stroke();
+	}
+	function drawText(hour,minute,second){  //填充文字
+		content.beginPath();
+		content.lineWidth = 15;
+		content.strokeStyle='#f0f';
+		content.fillStyle = '#f0f'; //颜色只能用#+英文
+		content.font = "24px Tahoma";
+		content.textAlign='center'; 
+		content.textBaseline='middle';
+		content.fillText(hour+':'+minute+':'+second,-6,0);
+		content.fillText('计时器',-6,24);
+		content.fill();
+		content.stroke();	
+	}
+	drawGrayCircle();
+	setInterval(function(){
+		now+=speed;
+		time++; //相当于秒
+		function getStr(str){
+			if(str<=9){
+				return '0'+str;
+			}else{
+				return str;
+			}
+		};
+		hour=getStr(Math.floor(time/3600));
+		minute=getStr(Math.floor((time-Math.floor(time/3600)*3600)/60));
+		second=getStr((time-Math.floor(time/3600)*3600)%60);
+		if(time%60==0){
+			content.clearRect(-500, -500, 2000, 2000);//不会清除坐标系
+			drawGrayCircle();
+		};
+
+		drawWhiteCircle(time%60);
+
+		content.clearRect(-120, -120, 200, 200);
+		drawText(hour,minute,second);
+	},1000);
+</script>
+</html>

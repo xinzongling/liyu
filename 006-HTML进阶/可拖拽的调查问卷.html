@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>可拖拽的调查问卷.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.container{
+			width: 640px;
+			margin: 50px auto;
+		}
+		.container .left-box{
+			float: left;
+			width: 320px;
+			height: 800px;
+		}
+		.container .right-box{
+			float: right;
+			border-left: 1px solid red;
+			padding-left: 10px;
+		}
+		.container .box{
+			width: 300px;
+			height: 50px;
+			border: 1px dashed gray;
+			margin-top: 10px;
+			cursor: pointer;
+			padding-left: 10px;
+			padding-top: 10px;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="left-box">
+			<h2>问卷</h2>
+		</div>
+		<div class="right-box">
+			<div class="username-box box" draggable="true">
+				<label for="username">姓名</label>
+				<input type="text" id="username">
+			</div>
+			<div class="age-box box" draggable="true">
+				<label for="age">年龄</label>
+				<input type="text" id="age">
+			</div>
+			<div class="hobbey-box box" draggable="true">
+				爱好
+				<input type="checkbox" id="basketball">
+				<label for="basketball">篮球</label>
+				<input type="checkbox" id="football">
+				<label for="football">足球</label>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		var targetEle=null;
+		$('.right-box')
+		.on('dragstart','.box',function(){
+			//console.log(this);  //1,把要拖动的元素存起来（通过事件代理）
+			targetEle=this;
+		});
+		$('.left-box')
+		.on('drop',function(){
+			$(this).append($(targetEle).clone());	
+		})
+		.on('dragover',function(ev){
+			ev.preventDefault();
+		});
+	})
+</script>
+</html>

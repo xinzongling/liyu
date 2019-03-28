@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽练习</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.container{
+			width: 500px;
+			height: 500px;
+			background: red;
+			position: absolute;
+			left: 50%;
+			top:  50%;
+			margin-left: -250px;
+			margin-top: -250px;
+		}
+		.box{
+			width: 100px;
+			height: 100px;
+			background: pink;
+		}
+	</style>
+</head>
+<body>
+	<div class="container"></div>
+	<div class="box" draggable="true"></div>
+</body>
+<script src="jquery-1.12.4.js"></script>
+<script>
+		$('.container')
+		.on('drop',function(){
+			$('.container').append($('.box'));
+		})
+		.on('dragover',function(ev){
+			ev.preventDefault();
+		})
+		.on('dragend',function(){
+			setTimeout(function(){
+				alert('已经完成拖拽');	
+			},300);
+		})
+</script>
+</html>

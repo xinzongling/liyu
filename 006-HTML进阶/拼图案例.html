@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拼图案例.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			width: 420px;
+			height: 200px;
+			margin: 100px auto;
+		}
+		ul li{
+			list-style: none;
+			float: left;
+			width: 84px;
+			height: 100px;
+		}
+	</style>
+</head>
+<body>
+	<ul class="container">
+		<li draggable="true"><img src="images/images/1.png" alt=""></li>
+		<li draggable="true"><img src="images/images/2.png" alt=""></li>
+		<li draggable="true"><img src="images/images/3.png" alt=""></li>
+		<li draggable="true"><img src="images/images/4.png" alt=""></li>
+		<li draggable="true"><img src="images/images/5.png" alt=""></li>
+		<li draggable="true"><img src="images/images/6.png" alt=""></li>
+		<li draggable="true"><img src="images/images/7.png" alt=""></li>
+		<li draggable="true"><img src="images/images/8.png" alt=""></li>
+		<li draggable="true"><img src="images/images/9.png" alt=""></li>
+		<li draggable="true"><img src="images/images/10.png" alt=""></li>
+	</ul>
+</body>
+<script src="jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		var targetEle=null;
+		$('.container')
+		.on('dragstart','li',function(){   //把被拖动的元素存起来。
+			targetEle=this;     //被拖动的元素
+		})
+		.on('drop','li',function(){
+			//交换li里面的图片
+			if(targetEle!=this){	 //要拖动的是容器，交换的是图片
+				var tmp=targetEle.innerHTML;	//容器,this指的是拖动图片所在的容器。
+				targetEle.innerHTML=this.innerHTML;
+				this.innerHTML=tmp;
+			}				
+		})
+		.on('dragover','li',function(ev){
+			ev.preventDefault();
+		})
+	})
+</script>
+</html>

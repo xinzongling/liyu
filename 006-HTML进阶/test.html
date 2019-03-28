@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<img src="" alt="">
+	<a href=""></a>
+</body>
+<script>/*
+	var arr=[3,4,5,8];
+	arr.splice(1,0,100);
+	console.log(arr);
+*//*
+	function foo(){
+		 var aaaa=0;
+		return function(){
+			aaaa++;
+			console.log(aaaa)
+		}
+	}
+
+	 f1=foo();
+	 f2=foo();	
+	f1();
+	f1();
+	f2();
+console.log(window)
+*/
+	/*
+	function show1(){
+		var a=100;
+		a++;
+		console.log(a)
+	}
+	function show2(){
+		var a=120;
+		a++;
+		console.log(a)
+	}
+	show1()
+	show2()*/
+	/*
+show()
+	function show(){
+		console.log(111)
+	}
+
+	var x=1;y=z=0;
+	var add=function(n){
+		return n=n+1;
+	}
+	y=add(x);
+	var add=function(n){
+		return n=n+3;
+	}
+	z=add(x);
+	console.log(x,y,z)*/
+/*
+	for(var i=1;i<=3;i++){ 
+		 setTimeout(function(){
+		 	console.log(i); 
+		 },0); 
+	}; */
+
+	/*
+	var i=1;
+	setTimeout(function(){
+		console.log(i); 
+	},0);
+	var i=2;
+	setTimeout(function(){
+		console.log(i); 
+	},0);
+	var i=3;
+	setTimeout(function(){
+		console.log(i); 
+	},0);*/
+
+
+/*
+	for(var i=0;i<8;i++){
+		var fn5=function(){
+			console.log('fn5',i);
+		}
+	
+	}
+	fn5()*/
+
+	/*
+var i=0;
+var fn5=function(){
+	console.log('fn5',i);
+}
+var i=1;
+var fn5=function(){
+	console.log('fn5',i);
+}
+var i=2;
+var fn5=function(){
+	console.log('fn5',i);
+}
+var i=3;
+var fn5=function(){
+	console.log('fn5',i);
+}
+*/
+/*
+
+var obj={
+	age:18,
+	fn:function(){
+		return ()=>{
+			console.log(this)
+			console.log(this.age)
+		}
+	}
+}
+
+var p=obj.fn()();
+
+*/
+
+
+/*
+var obj={
+	age:18,
+	fn:function(){
+		console.log(this.age)
+	}
+}
+ p=obj.fn;
+p()
+*/
+/*
+var obj={
+	age:18,
+	fn:function(){
+		return ()=>{			
+			return ()=>{
+				console.log(this.age)
+			}
+		}
+	}
+}
+
+var p=obj.fn()()();
+*/
+/*
+var obj={
+	age:18,
+	fn:function(){
+		return function(){			
+			return function(){
+				console.log(this.age)
+			}
+		}
+	}
+}
+var p=obj.fn;
+p()()();
+*/
+
+/*
+a=200;
+function show(){	
+	a++;
+	console.log(a)
+}
+show();
+show();*/
+
+/*
+for(var i=0;i<500;i++){
+	console.log(i);
+	i=null;
+}
+var i=0;
+console.log(i);
+
+var i=1;
+console.log(i);
+var i=2;
+console.log(i);*/
+
+/*
+var arr=[1,2,3];
+console.log(typeof arr[1])
+console.log(typeof number)
+console.log(typeof typeof arr)*/
+/*
+var a={name:'tom'};
+b=a;
+a.age=a={age:18};
+console.log(a,b)*/
+/*
+console.log(0.1+0.2);
+console.log(0.2+0.3);
+console.log(0.2);
+console.log(0.1+0.3);
+*/
+
+/*
+var a=2,b=3;
+var c=a+++b;
+console.log(c,a,b);
+var c=a+++(++b);
+console.log(c,a,b);
+*/
+/*
+var a=2;
+b=3;
+delete a;
+delete b;
+console.log(a)
+console.log(window)
+*/
+/*
+(function(i){
+
+})(i)
+*/
+/*
+var arr=[1,2,3,4,5,6,7,8];
+arr.pop()
+arr.pop()
+arr.push()
+arr.push()
+arr.shift();
+arr.shift();
+arr.unshift(12);
+arr.unshift(25);
+console.log(arr)
+
+arr.splice(1,2,200,300)
+
+console.log(arr)
+*/
+/*
+var a=5236;
+a=a+'';
+
+console.log(a.split('').join(','))
+
+var arr=[1,2];
+arr=arr+'';
+console.log(typeof arr)
+
+
+var obj={
+	name:'tom',
+	age:18,
+	friend:['tom','perter']
+};
+//obj=obj+'';
+console.log(obj)
+console.log(typeof obj)
+var color={'color':'pink'};
+var width={'width':'200px'};
+obj[color]='mycolor';
+obj[width]='mywidth';
+
+
+console.log(obj)
+console.log(typeof obj);
+
+for(key in obj){
+	console.log(typeof key)
+}
+
+console.log(typeof true)
+*/
+
+/*
+var str='1234526';
+console.log(str.match(2))
+console.log(/[2]/g.test(str))
+console.log(str.search(4))
+console.log(str.indexOf(4))
+console.log(str)
+*/
+/*
+(function aaa(){
+
+})()
+
+console.log(window)
+
+var arr=new Array(1,2,3);
+var arr=new Date();
+var arr1=arr.getTime();
+console.log(arr1)
+console.log(arr.getFullYear())
+console.log(arr.getMonth())
+console.log(arr.getDay())
+console.log(arr.getDate())
+console.log(arr.getHours())
+console.log(arr.getMinutes())
+console.log(arr.getSeconds())
+console.log(arr)*/
+
+/*
+var obj={
+	name:'tom'
+};
+console.log(obj instanceof Object)
+console.log(obj instanceof Array)
+var str=[21];
+//var str={name:'tom'};
+console.log(typeof str)
+console.log(str)
+console.log('11',Object.hasOwnProperty(length))
+*//*
+if((str instanceof Array)){
+	console.log('aa')
+}*//*
+if(str instanceof Function){
+	console.log('bb')
+}
+if(str instanceof Object){
+	console.log('cc')
+}*/
+/*
+var a=2;
+if(a=3){
+	console.log('aa')
+}
+console.log(bb)*/
+/*
+console.log(this)
+;(function aaa(){
+	console.log(this)
+})();*/
+
+
+var a=1;
+function show1(){
+	console.log(a);
+}
+
+function show2(){
+	var a=100;
+	show1();
+}
+show1()
+show2()
+</script>
+</html>

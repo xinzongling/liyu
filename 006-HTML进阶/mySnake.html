@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>mySnake</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		canvas{
+			background: #000;
+		}
+	</style>
+</head>
+<body>
+	<canvas></canvas>
+</body>
+<script>
+	var canvas=document.getElementsByTagName('canvas')[0];
+	canvas.width=1000;
+	canvas.height=600;
+	var content=canvas.getContext('2d');
+
+	//生成随机数
+	function getRandom(min,max){
+		return Math.round(min+(max-min)*Math.random());
+	}
+
+	//构造方块对象（x,y,color）
+	function Rect(x,y,color){
+		this.x=x;
+		this.y=y;
+		this.color=color;	
+
+		this.dX=20;
+		this.dY=0;
+	}
+	Rect.prototype={
+		constructor:Rect,
+		render:function(){
+			//绘制方块
+			content.beginPath();
+			content.fillStyle=this.color;
+			content.strokeRect(this.x,this.y,20,20);
+			content.fillRect(this.x,this.y,20,20);
+		},
+		update:function(){
+			this.x+=this.dX;
+			this.y+=this.dY;
+		}
+	};
+	var colorArr=['pink','orange','purple','tomato','blue','skyblue'
+	,'white'];
+	var rectArr=[]; 
+	var p=new Rect(getRandom(0,canvas.width-20),getRandom(0,canvas.height-20),colorArr[getRandom(0,colorArr.length-1)]);
+	p.render();
+	rectArr.push(p);
+
+
+
+	var snakeArr=[];
+	var snake=new Rect(0,0,'red');
+		snakeArr.push(snake);
+	var turnX=true;
+	var turnY=true;
+
+	var timer=setInterval(function(){
+		for(var i=0;i<snakeArr.length;i++){
+		if(isDie(snakeArr[0].x,snakeArr[0].y)){
+			alert('gemes over');
+			clearInterval(timer);
+		}
+		content.clearRect(0,0,canvas.width,canvas.height);
+		rectArr[0].render();
+		snakeArr[i].render();
+		snakeArr[i].update();
+		}
+	},100);
+
+	document.onkeydown=function(ev){
+		if(ev.keyCode==40){  //向下			
+			turnX=true;
+			if(!turnY) return;
+			turnY=false;
+			clearInterval([timer,timer1,timer2,timer3,timer4]);
+			for(var i=0;i<snakeArr.length;i++){
+				snakeArr[i].dX=0; //在定时器之外
+				snakeArr[i].dY=5;
+			}
+			var timer1=setInterval(function(){
+				clearInterval(timer1);
+				for(var i=0;i<snakeArr.length;i++){
+					console.log(snakeArr)
+				if(isDie(snakeArr[0].x,snakeArr[0].y)){
+					alert('gemes over');
+					clearInterval(timer1,timer2,timer3,timer4);
+				}				
+				setInterval(function(){
+					if(isEate(snakeArr[0],rectArr[0])){
+						//alert('eate....')
+						//移出小方块，生成新的小方块，并压入数组中
+						rectArr.shift(0);
+						var p=new Rect(getRandom(0,canvas.width-20),getRandom(0,canvas.height-20),colorArr[getRandom(0,colorArr.length-1)]);
+						p.render();
+						rectArr.push(p);
+						//生成一个新的方块，插入蛇中,随蛇移动
+						var snakeNew=new Rect(snakeArr[0].x,snakeArr[0].y-20,'gray');
+						snakeArr.push(snakeNew);
+						snakeArr[1].dX=0; 
+						snakeArr[1].dY=5;
+					};
+				},200);
+				content.clearRect(0,0,canvas.width,canvas.height);
+				rectArr[0].render();
+				for(var i=0;i<snakeArr.length;i++){
+					snakeArr[i].render();
+					snakeArr[i].update();
+				}
+				}
+			},120);
+		}else if(ev.keyCode==37){ //向左
+			turnY=true;
+			if(!turnX) return;
+			turnX=false;
+			clearInterval([timer,timer1,timer2,timer3,timer4]);
+			for(var i=0;i<snakeArr.length;i++){
+				snakeArr[i].dX=-5;
+				snakeArr[i].dY=0;
+			}
+			var timer2=setInterval(function(){
+				clearInterval(timer2);
+				for(var i=0;i<snakeArr.length;i++){
+				if(isDie(snakeArr[0].x,snakeArr[0].y)){
+					alert('gemes over');			
+					clearInterval(timer1,timer2,timer3,timer4);
+				}	
+				setInterval(function(){
+					if(isEate(snakeArr[0],rectArr[0])){
+						rectArr.shift(0);
+						var p=new Rect(getRandom(0,canvas.width-20),getRandom(0,canvas.height-20),colorArr[getRandom(0,colorArr.length-1)]);
+						p.render();
+						rectArr.push(p);
+						var snakeNew=new Rect(snakeArr[0].x+20,snakeArr[0],'gray');
+						snakeArr.push(snakeNew);
+						snakeArr[1].dX=-5; 
+						snakeArr[1].dY=0;						
+					};
+				},200);		
+				content.clearRect(0,0,canvas.width,canvas.height);
+				rectArr[0].render();
+				for(var i=0;i<snakeArr.length;i++){
+					snakeArr[i].render();
+					snakeArr[i].update();
+				}
+				}
+			},120);
+		}else if(ev.keyCode==38){   //向上
+			turnX=true;
+			if(!turnY) return;
+			turnY=false;
+			clearInterval([timer,timer1,timer2,timer3,timer4]);
+			for(var i=0;i<snakeArr.length;i++){
+				snakeArr[i].dX=0;
+				snakeArr[i].dY=-5;
+			}
+			var timer3=setInterval(function(){
+				clearInterval(timer3);
+				for(var i=0;i<snakeArr.length;i++){
+				if(isDie(snakeArr[0].x,snakeArr[0].y)){
+					alert('gemes over');					
+					clearInterval(timer1,timer2,timer3,timer4);
+				}
+				setInterval(function(){
+					if(isEate(snakeArr[0],rectArr[0])){
+						rectArr.shift(0);
+						var p=new Rect(getRandom(0,canvas.width-20),getRandom(0,canvas.height-20),colorArr[getRandom(0,colorArr.length-1)]);
+						p.render();
+						rectArr.push(p);
+						var snakeNew=new Rect(snakeArr[0].x,snakeArr[0].y+20,'gray');
+						snakeArr.push(snakeNew);
+						snakeArr[1].dX=0; 
+						snakeArr[1].dY=-5;					
+					};
+				},200);
+				content.clearRect(0,0,canvas.width,canvas.height);
+				rectArr[0].render();
+				for(var i=0;i<snakeArr.length;i++){
+					snakeArr[i].render();
+					snakeArr[i].update();
+				}
+			}
+			},120);
+		}else if(ev.keyCode==39){ //向右			
+			turnY=true;
+			if(!turnX) return;
+			turnX=false;
+			clearInterval([timer,timer1,timer2,timer3,timer4]);
+			for(var i=0;i<snakeArr.length;i++){
+				snakeArr[i].dX=5;
+				snakeArr[i].dY=0;
+			}
+			var timer4=setInterval(function(){
+				clearInterval(timer4);
+				for(var i=0;i<snakeArr.length;i++){
+				if(isDie(snakeArr[0].x,snakeArr[0].y)){
+					alert('gemes over');					
+					clearInterval(timer1,timer2,timer3,timer4);
+				}
+				setInterval(function(){
+					if(isEate(snakeArr[0],rectArr[0])){
+						rectArr.shift(0);
+						var p=new Rect(getRandom(0,canvas.width-20),getRandom(0,canvas.height-20),colorArr[getRandom(0,colorArr.length-1)]);
+						p.render();
+						rectArr.push(p);
+
+						var snakeNew=new Rect(snakeArr[0].x-20,snakeArr[0].y,'gray');
+						snakeArr.push(snakeNew);
+						snakeArr[1].dX=5; 
+						snakeArr[1].dY=0;					
+					};
+				},60);
+				content.clearRect(0,0,canvas.width,canvas.height);
+				rectArr[0].render();
+				var timer5=setInterval(function(){
+					console.log('snakeArr..',snakeArr[0].x,snakeArr[0].y,snakeArr[1].x,snakeArr[1].y)
+				},50)
+				setInterval(function(){
+				for(var j=0;j<snakeArr.length;j++){
+					snakeArr[j].render();
+					snakeArr[j].update();
+				}
+				},100)
+			}
+			},120);
+		}
+	}
+	function isDie(x,y){
+		if(x>980||y>580||x<0||y<0){
+			return true
+		}
+	};
+
+	function isEate(obj1,obj2){
+	  //假设相碰撞即为吃掉,加上一半的偏移
+		console.log(obj1.x,obj1.y,obj2.x,obj2.y)
+		if((obj1.x+20)>(obj2.x+10)
+			&&(obj1.y+20)>(obj2.y+10) //840 220 877 240
+			&&(obj2.x+10)>obj1.x
+			&&(obj2.y+10)>obj1.y
+		){	console.log('true...')
+			return true;
+		}else{console.log('false...')
+			return false;
+		};
+	}
+</script>
+</html>
