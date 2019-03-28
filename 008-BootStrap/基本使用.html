@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>基本使用.html</title>
+	<link rel="stylesheet" href="bootstrap-3.3.7/dist/css/bootstrap.min.css">
+	<style>
+		body {
+  position: relative;
+}
+	</style>
+</head>
+<body data-spy="scroll" data-target="#navbar-example">
+	 1111111
+  <div id="navbar-example">
+    <ul class="nav nav-tabs" role="tablist">
+      <li>222</li>
+      <li>222FGFD</li>
+      <li>222fgfgfggff</li>
+      <li>typically this would be the <body>). Then add the data-target attribute with the ID or class of the parent element of any Bootstrap .nav component.
+
+Copy
+body {
+  position: relative;
+}
+Copy
+<body data-spy="scroll" data-target="#navbar-example">
+
+<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+
+<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
+
+<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+
+<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
+
+ <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+
+<button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">点我弹出/隐藏弹出框</button>
+
+
+
+</body>
+
+
+
+
+<script src="jQuery/jquery-1.12.4.min.js"></script>
+<script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+<script>
+	$('#myTabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+
+	$('body').scrollspy({ target: '#navbar-example' });
+	$('body').scrollspy({ target: '#navbar-example' });
+
+	$('.dropdown-toggle').dropdown('toggle')
+
+
+
+
+	  $('#myButton').on('click', function () {
+    var $btn = $(this).button('loading')
+    // business logic...
+    $btn.button('reset')
+  })
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+</html>
