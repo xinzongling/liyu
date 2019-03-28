@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>手风琴</title>
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	.box{
+		width: 800px;
+		height: 300px;
+		border: 1px solid black;
+		margin: 100px auto;
+		overflow: hidden;
+	}
+	.box ul li{
+		list-style: none;
+		float: left;
+		width: 160px;
+		height: 300px;
+		overflow: hidden;
+		transition: all 0.5s linear;
+	}
+	.box ul li img{
+		height: 100%;
+	}
+	 .box ul:hover li{
+		width: 100px;
+	}
+	.box ul li:hover{
+		width: 400px;
+	}
+</style>
+</head>
+<body>
+	<div class="box">
+		<ul>
+			<li><img src="images/girl1.jpg" alt=""></li>
+			<li><img src="images/girl2.jpg" alt=""></li>
+			<li><img src="images/girl3.jpg" alt=""></li>
+			<li><img src="images/girl4.jpg" alt=""></li>
+			<li><img src="images/girl5.jpg" alt=""></li>
+		</ul>
+	</div>
+</body>
+</html>

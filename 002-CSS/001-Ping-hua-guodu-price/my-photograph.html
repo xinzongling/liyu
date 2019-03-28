@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>我的相册</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;	
+		}
+		.container input,.container a{
+			width: 20%;
+			height: 34px;
+			position: fixed;
+			top: 0;
+			background: black;
+			cursor: pointer;
+		}
+		.container #btn1,#btn1+a{
+			left: 0%;
+		}
+		.container #btn2,#btn2+a{
+			left: 20%;
+		}
+		.container #btn3,#btn3+a{
+			left: 40%;
+		}
+		.container #btn4,#btn4+a{
+			left: 60%;
+		}
+		.container #btn5,#btn5+a{
+			left: 80%;
+		}
+		.container a{
+			color:green;
+			font-size: 20px;
+			text-decoration: none;
+			text-align: center;
+			line-height: 34px;
+			z-index: 88;
+		}
+		.container input{
+			z-index: 99;
+			opacity: 0;
+		}
+		.container input:checked +a{
+			background: yellow;
+			color:purple;
+		}
+		.container input:hover +a{
+			background: #ccc;
+		}
+		.container input:checked:hover +a{
+			background: yellow;
+			color: #ff2c2c;
+		}
+		.content{
+			margin: 34px 0 0 0;
+			transition: all 0.5s;
+		} 
+		html,body,.container,.content,.panel{
+			height: 100%;
+		}
+		.container{
+			overflow: hidden;
+		}
+		.container #btn1:checked~.content{
+			transform: translateY(0%);
+		}
+		.container #btn2:checked~.content{
+			transform: translateY(-100%);
+		}
+		.container #btn3:checked~.content{
+			transform: translateY(-200%);
+		}
+		.container #btn4:checked~.content{
+			transform: translateY(-300%);
+		}
+		.container #btn5:checked~.content{
+			transform: translateY(-400%);
+		}
+		.panel{
+			column-count: 4;
+			column-gap: 1em;
+			padding: 1em;
+			box-sizing: border-box;
+		}
+		.image{
+			width: 100%;
+			border-radius: 4px; 
+			overflow: hidden; 
+			cursor: pointer;
+		}
+		.image img{
+			width: 100%;
+			height: 100%;
+			border-radius: 4px;
+			transition: all 0.5s;
+		} 
+		.image.w{
+			height: 30%;
+		}
+		.image.h{
+			height: 65%;
+		}
+		.mt{
+			margin: 1em 0 0 0;
+		}
+		#btn1:checked ~.content #page1,
+		#btn2:checked ~ .content #page2,
+		#btn3:checked ~ .content #page3,
+		#btn4:checked ~ .content #page4,
+		#btn5:checked ~ .content #page5
+		{
+			animation: sport 1s linear 0s 1 normal;
+		}
+		@keyframes sport{
+			from{
+				opacity: 0;
+			}
+			to{
+				opacity: 1;
+			}
+		}
+		.image:hover img{
+			transform: scale(1.1,1.1);
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<input type="radio" name="radio" id="btn1" checked="">
+		<a href="#">美女</a>
+		<input type="radio" name="radio" id="btn2">
+		<a href="#">山水</a>
+		<input type="radio" name="radio" id="btn3">
+		<a href="#">建筑</a>
+		<input type="radio" name="radio" id="btn4">
+		<a href="#">名人</a>
+		<input type="radio" name="radio" id="btn5">
+		<a href="#">汽车</a>
+		<div class="content">
+		    <section class="panel" id="page1">
+		    	<div class="image w">
+		    		<img src="images/g/g1.jpg" alt="">
+		    	</div>
+		    	<div class="image h mt">
+		    		<img src="images/g/g2.jpg" alt="">
+		    	</div>
+		    	<div class="image h">
+		    		<img src="images/g/g3.jpg" alt="">
+		    	</div>
+		    	<div class="image w mt">
+		    		<img src="images/g/g4.jpg" alt="">
+		    	</div>
+		    	<div class="image w">
+		    		<img src="images/g/g5.jpg" alt="">
+		    	</div>
+		    	<div class="image h mt">
+		    		<img src="images/g/g6.jpg" alt="">
+		    	</div>
+		    	<div class="image h">
+		    		<img src="images/g/g7.jpg" alt="">
+		    	</div>
+		    	<div class="image w mt">
+		    		<img src="images/g/g8.jpg" alt="">
+		    	</div>
+		    </section>
+		    <section class="panel" id="page2">
+		    	<div class="image w">
+		    		<img src="images/w/w1.jpg" alt="">
+		    	</div>
+		    	<div class="image h mt">
+		    		<img src="images/w/w2.jpg" alt="">
+		    	</div>
+		    	<div class="image h">
+		    		<img src="images/w/w3.jpg" alt="">
+		    	</div>
+		    	<div class="image w mt">
+		    		<img src="images/w/w4.jpg" alt="">
+		    	</div>
+		    	<div class="image w">
+		    		<img src="images/w/w5.jpg" alt="">
+		    	</div>
+		    	<div class="image h mt">
+		    		<img src="images/w/w6.jpg" alt="">
+		    	</div>
+		    	<div class="image h">
+		    		<img src="images/w/w7.jpg" alt="">
+		    	</div>
+		    	<div class="image w mt">
+		    		<img src="images/w/w8.jpg" alt="">
+		    	</div>
+		    </section>
+		    <section class="panel" id="page3">
+		    	<div class="image w">
+		    		<img src="images/a/a1.jpg" alt="">
+		    	</div>
+		    	<div class="image h mt">
+		    		<img src="images/a/a2.jpg" alt="">
+		    	</div>
+		    	<div class="image h">
+		    		<img src="images/a/a3.jpg" alt="">
+		    	</div>
+		    	<div class="image w mt">
+		    		<img src="images/a/a4.jpg" alt="">
+		    	</div>
+		    	<div class="image w">
+		    		<img src="images/a/a5.jpg" alt="">
+		    	</div>
+		    	<div class="image h mt">
+		    		<img src="images/a/a6.jpg" alt="">
+		    	</div>
+		    	<div class="image h">
+		    		<img src="images/a/a7.jpg" alt="">
+		    	</div>
+		    	<div class="image w mt">
+		    		<img src="images/a/a8.jpg" alt="">
+		    	</div>
+		    </section>
+		    <section class="panel" id="page4">
+		    	<div class="image w">
+		    		<img src="images/s/s1.jpg" alt="">
+		    	</div>
+		    	<div class="image h mt">
+		    		<img src="images/s/s2.jpg" alt="">
+		    	</div>
+		    	<div class="image h">
+		    		<img src="images/s/s3.jpg" alt="">
+		    	</div>
+		    	<div class="image w mt">
+		    		<img src="images/s/s4.jpg" alt="">
+		    	</div>
+		    	<div class="image w">
+		    		<img src="images/s/s5.jpg" alt="">
+		    	</div>
+		    	<div class="image h mt">
+		    		<img src="images/s/s6.jpg" alt="">
+		    	</div>
+		    	<div class="image h">
+		    		<img src="images/s/s7.jpg" alt="">
+		    	</div>
+		    	<div class="image w mt">
+		    		<img src="images/s/s8.jpg" alt="">
+		    	</div>
+		    </section>
+		    <section class="panel" id="page5">
+		    	<div class="image w">
+		    		<img src="images/c/c1.jpg" alt="">
+		    	</div>
+		    	<div class="image h mt">
+		    		<img src="images/c/c2.jpg" alt="">
+		    	</div>
+		    	<div class="image h">
+		    		<img src="images/c/c3.jpg" alt="">
+		    	</div>
+		    	<div class="image w mt">
+		    		<img src="images/c/c4.jpg" alt="">
+		    	</div>
+		    	<div class="image w">
+		    		<img src="images/c/c5.jpg" alt="">
+		    	</div>
+		    	<div class="image h mt">
+		    		<img src="images/c/c6.jpg" alt="">
+		    	</div>
+		    	<div class="image h">
+		    		<img src="images/c/c7.jpg" alt="">
+		    	</div>
+		    	<div class="image w mt">
+		    		<img src="images/c/c8.jpg" alt="">
+		    	</div>
+		    </section>
+		</div>
+	</div>
+</body>
+</html>
