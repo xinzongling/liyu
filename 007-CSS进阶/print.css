@@ -1,0 +1,9 @@
+@media print and (min-width:300px){
+	p{
+		color:blue;
+		font-size: 24px;
+	}
+	body{
+		background: blue;
+	}
+}

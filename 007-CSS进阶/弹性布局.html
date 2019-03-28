@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>弹性布局.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;				
+		}
+		.f1{
+			width: 1000px;
+			height: 600px;
+			border: 1px solid black;
+			margin: 0 auto;
+			display: flex;
+			/*flex-direction:row;*/
+			/* flex-direction:row-reverse; */
+			/*flex-direction:column;*/
+			/* flex-direction:column-reverse; */
+			flex-wrap:wrap;
+			/* flex-wrap:wrap; */
+			/* flex-wrap:wrap-reverse; */
+			/* justify-content:space-around; */
+			
+			/*align-items:stretch;*/
+			/* align-content:stretch;
+			align-content:flex-start; */
+			/* align-items:flex-end; */
+			/* align-content:flex-end; */
+			align-items:center;
+		}
+		.s1{
+			width: 200px;
+			height: 60px;
+			background: red;
+		}
+		.s2{
+			width: 300px;
+			height: 60px;
+			background: pink;
+		}
+		.s3{
+			width: 800px;
+			height: 60px;
+			background: blue;
+		}
+	</style>
+</head>
+<body>
+	<div class="f1">
+		<div class="s1">我是s1</div>
+		<div class="s2">我是s2</div>
+		<div class="s3">我是s3</div>
+	</div>
+</body>
+</html>

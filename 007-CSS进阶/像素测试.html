@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Document</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	img{
+		float: left;
+		width: 12rem;
+	}
+	p{
+		font-size: 4rem;
+	}
+	</style>
+</head>
+<body>
+	<img src="img/3.jpg" alt="">
+	<p>我是段落</p>
+</body>
+<script>
+	;(function(win,doc){
+		//一个rem等于一个html的font-size的大小
+		//屏幕越大，html上的font-size 越大
+		var oHtml=doc.getElementsByTagName('html')[0];
+		function getFontSize(){
+			//获取设备的宽度
+			var iWidth=doc.body.clientWidth||doc.documentElement.clientWidth;
+			console.log(iWidth)
+			var iFontSize=iWidth/100;
+			oHtml.style.fontSize=iFontSize+'px';
+			console.log('iFontSize',iFontSize)
+		}		
+		win.addEventListener('resize',getFontSize,false);
+		win.addEventListener('DOMContentLoad',getFontSize,false);
+	})(window,document);
+</script>
+</html>

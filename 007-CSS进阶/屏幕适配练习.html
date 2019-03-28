@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>屏幕适配练习.html</title>
+	<style>
+		img{
+			width: 15rem;
+			float: left;
+		}
+		p{
+			float: left;
+			font-size: 2rem;
+		}
+		.box{
+			width: 23rem;
+			height: 23rem;
+			background: pink;
+		}
+	</style>
+</head>
+<body>
+	<img src="img/3.jpg" alt="">
+	<p>我是段落</p>
+	<div class="box"></div>
+</body>
+<script>
+	;(function(win,doc){
+		var oHtml=doc.getElementsByTagName('html')[0];
+		function getFontSize(){
+			var iWidth=doc.body.clientWidth||doc.documentElement.clientWidth;
+			var iFontSize=iWidth/100;
+			oHtml.style.fontSize=iFontSize+'px';
+		};		
+		win.addEventListener('resize',getFontSize,false);
+		win.addEventListener('DOMContentLoad',getFontSize,false);
+	})(window,document);
+</script>
+</html>

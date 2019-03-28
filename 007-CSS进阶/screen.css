@@ -1,0 +1,15 @@
+@media screen and (max-width:740px) and (orientation:landscape){
+	p{
+		color:red;
+		font-size: 30px;
+	}
+	body{
+		background: red;
+	}
+}  /* and前后一定要加上空格 */
+@media screen and (min-width:740px) and (max-width:840px) {
+	p{
+		color:pink;
+		font-size: 30px;
+	}
+}

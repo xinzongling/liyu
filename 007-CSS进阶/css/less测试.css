@@ -1,0 +1,34 @@
+.box1 {
+  float: left;
+  margin-left: 10px;
+}
+.box {
+  color: #ff0000;
+  width: 100px;
+  height: 100px;
+  background: #ffc0cb;
+  margin-top: 10px;
+  float: left;
+  margin-left: 10px;
+  width: 200px;
+  height: 300px;
+}
+.f1 {
+  width: 300px;
+  height: 300px;
+  background: pink;
+}
+.f1 .s1 {
+  width: 200px;
+  height: 200px;
+  background: green;
+}
+.f1 .s1 .s2 {
+  width: 100px;
+  height: 100px;
+  background: blue;
+}
+.box1 {
+  width: 200px;
+  height: 300px;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>弹性布局练习</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.container{
+			width: 960px;
+			height: 600px;
+			border: 1px solid black;
+			margin: 0 auto;
+			display: flex;
+			flex-direction:row-reverse;
+		}
+		.s1,.s2,.s3,.s4,.s5,.s6,.s7,.s8,.s9{
+			width: 100px;
+			height: 100px;
+			background: pink;
+			font-size: 24px;
+			text-align: center;
+			line-height: 100px; 
+		}
+		.s4,.s5,.s6{
+			margin-top: 250px;
+		}
+		.s7,.s8,.s9{
+			margin-top: 500px;
+		}
+		.s2,.s3,.s5,.s6,.s8,.s9{
+			margin-right: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+			<div class="s1">son1</div>
+			<div class="s2">son2</div>
+			<div class="s3">son3</div>
+			<div class="s4">son4</div>
+			<div class="s5">son5</div>
+			<div class="s6">son6</div>
+			<div class="s7">son7</div>
+			<div class="s8">son8</div>
+			<div class="s9">son9</div>
+	</div>
+</body>
+</html>
