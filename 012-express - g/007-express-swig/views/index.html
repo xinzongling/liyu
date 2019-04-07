@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ title }}</title>
+</head>
+<body>
+	<p>{{ content }}</p>
+
+	<p>{{ name }}</p>
+	
+	<p>{{ age }}</p>
+
+	<p>{{ obj.name }}</p>
+	
+	<p>{{ obj.age }}</p>
+
+	<p>
+		{% if name === 'tom' %}
+		  hello Tom
+		{% endif %}		
+	</p>
+	<p>
+		{% if age >= 18 %}
+		  成年人
+		 {% else %}
+  			未成年人
+		{% endif %}		
+	</p>
+</body>
+</html>
