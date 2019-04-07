@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index.html</title>
+</head>
+<body>
+	<button>get</button>
+	<button>post</button>
+	<button>put</button>
+	<button>delete</button>
+</body>
+<script src="lb/jQuery/jquery-1.12.4.min.js"></script>
+<script>
+	$('button').eq(0).on('click',function(){
+		$.ajax({
+			url:'/',
+			data:{
+				name:'tom',
+				age:18
+			},
+			type:'post'
+		})
+		.done(data=>{
+			console.log(data);
+		})
+	})
+	$('button').eq(1).on('click',function(){
+		$.ajax({
+			url:'/user/tom/id/123',
+			type:'post'
+		})
+		.done(data=>{
+			console.log(data);
+		})
+	})
+	$('button').eq(2).on('click',function(){
+		$.ajax({
+			url:'/',
+			type:'put'
+		})
+		.done(data=>{
+			console.log(data);
+		})
+	})
+	$('button').eq(3).on('click',function(){
+		$.ajax({
+			url:'/',
+			type:'delete'
+		})
+		.done(data=>{
+			console.log(data);
+		})
+	})
+
+</script>
+</html>

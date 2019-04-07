@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{% block title %}{% endblock  %}</title>
+	{% block head %}{% endblock  %}
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.header{
+			height: 100px;
+			background: red;
+		}
+		.body{
+			height: 800px;
+			background: green;
+		}
+		.side{
+			width: 200px;
+			height: 800px;
+			background: blue;
+			float: left;
+		}
+		.content{
+			width: 1659px;
+			height: 800px;
+			background: orange;
+			float: left;
+		}
+		.footer{
+			height: 100px;
+			background: pink;
+		}
+	</style>
+</head>
+<body>
+	<div class="header">header</div>
+	<div class="body">
+		<div class="side">side</div>
+		<div class="content">			
+			{% block content %}{% endblock  %}
+		</div>
+	</div>
+	<div class="footer">footer</div>
+</body>
+<script src="js/js.js"></script>
+
+<script>
+	{% include "./pep.js" %}
+</script>
+
+{% block footer %}{% endblock  %}
+</html>
